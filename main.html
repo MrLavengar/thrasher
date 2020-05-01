@@ -1,13 +1,10 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Main page</title>
-   
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!--Bootsrap 4 CDN-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
@@ -32,9 +29,203 @@
 		</a>
 	  </div>
 
-	  <h1>Welcome in our thrasher app!</h1>
+	  <div id="demo" class="carousel slide" data-ride="carousel" style='margin-top:2em'>
+
+		
+		
+		<!-- The slideshow -->
+		<div class="carousel-inner">
+			<div class="carousel-item">
+				<a href='#what-is-recycling'></a><img src="images/whatIsRecycling.jpg" alt="What is recycling?" width="100%" >
+			  </div>
+			<div class="carousel-item active">
+				<a href='#3r'><img src="images/3r_trashes.jpg" alt="3R rule" width="100%"  >
+		  </div>
+		  <div class="carousel-item">
+			<a href='#why-recycle-is-important'><img src="images/whyRecIsImportant.jpg" alt="Why recycling is so important?" width="100%" ></a>
+		  </div>
+		  
+		</div>
+		
+		<!-- Left and right controls -->
+		<a class="carousel-control-prev" href="#demo" data-slide="prev">
+		  <span class="carousel-control-prev-icon"></span>
+		</a>
+		<a class="carousel-control-next" href="#demo" data-slide="next">
+		  <span class="carousel-control-next-icon"></span>
+		</a>
+
+
+		<div id='what-is-recycling' class='recycle-article'>
+		<h2 class='article-id'>What is Recycling?</h2>
+		<p>Unless you have been on another planet for the last century, then you have probably heard of it. 
+			Recycling is the process of breaking down and re-using materials that would otherwise be 
+			thrown away as trash. Many communities and businesses make it easy to recycle by placing 
+			labeled containers in the open for public use, or providing bins for home and business owners 
+			who have curbside pickup.<br><br>
+			There are numerous benefits to recycling, and with so many new technologies making 
+			even more materials recyclable, with everyone’s help we can clean up our Earth. 
+			Recycling not only benefits the environment but also have a positive effect on the economy. 
+			Recycling is reported throughout human history but has come a long way since the time of Plato 
+			when humans re-used broken tools and pottery when materials were scarce. Today, there is a 
+			multitude of benefits that come from recycling as well as tons of items that can be recycled.</p>
+		</div>
+		
+		<div id='3r' class='recycle-article'>
+			<h2 class='article-id'>3r rule</h2>
+			<p>We cannot stop waste production entirely, but everyone 
+				can make a significant contribution. Think before you bin! It saves energy 
+				and natural resources, helps to reduce pollution and reduces the need for landfill.
+				The '3r' rule reffers to:</p>
+			
+				<div id="accordion">
+					<div class="card">
+					  <div class="card-header" id="headingReduce1">
+						<h5 class="mb-0">
+						  <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseReduceOne" aria-expanded="false" aria-controls="collapseReduceOne">
+							Reduce
+						  </button>
+						</h5>
+					  </div>
+				  
+					  <div id="collapseReduceOne" class="collapse" aria-labelledby="headingReduce1" data-parent="#accordion">
+						<div class="card-body">
+							Reducing - Try to reduce the amount of waste you produce, 
+							as this is the best way to help the environment!
+						</div>
+					  </div>
+					</div>
+					<div class="card">
+					  <div class="card-header" id="headingReduce2">
+						<h5 class="mb-0">
+						  <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseReduceTwo" aria-expanded="false" aria-controls="collapseReduceTwo">
+							Reuse
+						</button>
+						</h5>
+					  </div>
+					  <div id="collapseReduceTwo" class="collapse" aria-labelledby="headingReduce2" data-parent="#accordion">
+						<div class="card-body">
+							Reusing - Think of ways you could reuse something, 
+							like shredding paper for your hamster rather than buying bedding or saving 
+							glass jars for storage.
+						</div>
+					  </div>
+					</div>
+					<div class="card">
+					  <div class="card-header" id="headingReduce3">
+						<h5 class="mb-0">
+						  <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							Recycle
+						  </button>
+						</h5>
+					  </div>
+					  <div id="collapseThree" class="collapse" aria-labelledby="headingReduce3" data-parent="#accordion">
+						<div class="card-body">
+							Recycling (and composting). This enables the 
+							materials you throw away to be used again by making them into new products.</p>			
+						</div>
+					  </div>
+					</div>
+				</div>
+		</div>
+		<div id='why-recycle-is-important' class='recycle-article'>
+			<h2 class='article-id'>Why is it important?</h2>
+			<p>If you’re not already recycling, find out more about how easy it is and how you can
+				 really make a difference. For those who already recycle, 
+				 discover the positive effect your recycling efforts are 
+				 making and find out what else you may be able to do.</p>
+
+				<div id="accordion">
+					<div class="card">
+					  <div class="card-header" id="headingWhyIsItImportantOne">
+						<h5 class="mb-0">
+						  <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseWhyIsItImportantOne" aria-expanded="false" aria-controls="collapseWhyIsItImportantOne">
+							Recycling Conserves Resources
+						  </button>
+						</h5>
+					  </div>
+				  
+					  <div id="collapseWhyIsItImportantOne" class="collapse" aria-labelledby="headingWhyIsItImportantOne" data-parent="#accordion">
+						<div class="card-body">
+							When we recycle, used materials are converted into new products, 
+							reducing the need to consume natural resources. If used materials are not 
+							recycled, new products are made by extracting fresh, raw material from the 
+							Earth, through mining and forestry. Recycling helps conserve important raw 
+							materials and protects natural habitats for the future.
+						</div>
+					  </div>
+					</div>
+
+
+					<div class="card">
+					  <div class="card-header" id="headingWhyIsItImportantTwo">
+						<h5 class="mb-0">
+						  <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseWhyIsItImportantTwo" aria-expanded="false" aria-controls="collapseWhyIsItImportantTwo">
+							Recycling saves energy
+						</button>
+						</h5>
+					  </div>
+					  <div id="collapseWhyIsItImportantTwo" class="collapse" aria-labelledby="headingWhyIsItImportantTwo" data-parent="#accordion">
+						<div class="card-body">
+							Using recycled materials in the manufacturing process uses considerably 
+							less energy than that required for producing new products from 
+							raw materials – even when comparing all associated costs including transport etc. 
+							Plus there are extra energy savings because more energy is required to 
+							extract, refine, transport and process raw materials ready for industry 
+							compared with providing industry-ready materials.
+						</div>
+					  </div>
+					</div>
+
+
+
+
+
+					<div class="card">
+					  <div class="card-header" id="headingWhyIsItImportantThree">
+						<h5 class="mb-0">
+						  <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseWhyIsItImportantThree" aria-expanded="false" aria-controls="collapseWhyIsItImportantThree">
+							Recycling reduces landfill
+						  </button>
+						</h5>
+					  </div>
+					  <div id="collapseWhyIsItImportantThree" class="collapse" aria-labelledby="headingWhyIsItImportantThree" data-parent="#accordion">
+						<div class="card-body">
+							When we recycle, recyclable materials are reprocessed into new products, 
+							and as a result the amount of rubbish sent to landfill sites reduces. 
+							There are over 1,500 landfill sites in the UK, and in 2001, these sites 
+							produced a quarter of the UK’s emissions of methane, a powerful greenhouse gas.</p>
+						</div>
+					  </div>
+					</div>
+
+					<div class="card">
+						<div class="card-header" id="headingWhyIsItImportantFour">
+						  <h5 class="mb-0">
+							<button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseWhyIsItImportantFour" aria-expanded="false" aria-controls="collapseWhyIsItImportantFour">
+							  Recycling helps protect the environment
+						  </button>
+						  </h5>
+						</div>
+						<div id="collapseWhyIsItImportantFour" class="collapse" aria-labelledby="headingWhyIsItImportantFour" data-parent="#accordion">
+						  <div class="card-body">
+							  Recycling reduces the need for extracting (mining, quarrying and logging), 
+							  refining and processing raw materials all of which create substantial air 
+							  and water pollution. As recycling saves energy it also reduces greenhouse gas 
+							  emissions, which helps to tackle climate change. Current UK recycling is 
+							  estimated to save more than 18 million tonnes of CO2 a year – the equivalent 
+							  to taking 5 million cars off the road.
+						  </div>
+						</div>
+					  </div>
+				</div>
+		</div>
+				
 <script src="app.js">
 	
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
