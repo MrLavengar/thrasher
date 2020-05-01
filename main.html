@@ -15,13 +15,25 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 	<!--Custom styles-->
-	<link rel="stylesheet" type="text/css" href="style/filename.css">
+	<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./style/main.css">
 </head>
 <body>
-	<div class="form-group">
-		<!-- dodalem do inputa onclick="location.href='main.html'" i zmieniłem typa z submit na button-->
-		<input type="button" onclick="location.href='barcode-scanner.html';" value="Go to scanner" class="btn float-right login_btn">
-	</div>
 
+	<div class="topnav" id="myTopnav">
+		<a href="main.html" class="active">Home</a>
+		<a href="barcode-scanner.html">Scanner</a>
+		<a href="#contact">Contact</a>
+		<a href="#about">About</a>
+		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+		  <i class="fa fa-bars"></i>
+		</a>
+	  </div>
+
+
+<script src="app.js">
+	
+</script>
 </body>
 </html>
