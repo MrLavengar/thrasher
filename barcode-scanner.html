@@ -15,7 +15,6 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 	<!--Custom styles-->
-    <link rel="stylesheet" type="text/css" href="style/filename.css">
     <link rel="icon" type="image/png" href="./images/icons/favicon.png" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,29 +29,28 @@
 </head>
 <body>
 
-    <main class="wrapper" style="padding-top:2em">
+    <main class="wrapper" style="padding-top:2em;text-align: center;">
 
         <section class="container" id="demo-content">
             <h1 class="title">Scan barcode from Video Camera</h1>
 
             <p>
-                <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
+                <a href="/main.html"><button class='btn btn-light'>Return home screen 🏡</button></a>
+                
             </p>
 
             <p>
-                This example shows how to scan a barcode with ZXing javascript library from the device video camera. If more
-                than one video input devices are available (for example front and back camera) the example shows how to read
-                them and use a select to change the input device.
+                Scan the barcode to decode it number
             </p>
 
             <div>
-                <a class="button" id="startButton">Start</a>
-                <a class="button" id="resetButton">Reset</a>
+                <a class="button" id="startButton" style='color: white'>Start</a>
+                <a class="button" id="resetButton" style='color: white'>Reset</a>
             </div>
 
-            <div>
-                <video id="video" width="600" height="400" style="border: 1px solid gray"></video>
-            </div>
+            
+                <div><video id="video" height=300px width=100% style="border: 1px solid gray;"></video></div>
+            
 
             <div id="sourceSelectPanel" style="display:none">
                 <label for="sourceSelect">Change video source:</label>
@@ -62,16 +60,9 @@
 
             <label>Result:</label>
             <pre><code id="result"></code></pre>
-
-            <p>See the <a href="https://github.com/zxing-js/library/tree/master/docs/examples/barcode-camera/">source code</a>  for this example.</p>
-
+            <button class='btn-success' id='save 'style='color:White'>Save</button>
+            
         </section>
-
-        <footer class="footer">
-            <section class="container">
-                <p>ZXing TypeScript Demo. Licensed under the <a target="_blank" href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
-            </section>
-        </footer>
 
     </main>
 
