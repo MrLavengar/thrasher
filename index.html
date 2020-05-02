@@ -143,6 +143,7 @@ const signInWithGoogle = () => {
   
     auth.signInWithPopup(googleProvider)
     .then(() => {
+		location.href='main.html';
       console.log('You\'re now signed in !');
     })
     .catch(error => {
@@ -155,13 +156,14 @@ const signInWithFacebook = () => {
     
     auth.signInWithPopup(facebookProvider)
     .then(() => {
+	location.href='main.html';
     console.log('Signed in successfully !');
     })
     .catch(error => {
     console.error(error);
     });
 }
-
+/* won't work, I won't receieve access to Twitter account for developers on time
 const signInWithTwitter = () => {
     const twitterProvider = new firebase.auth.TwitterAuthProvider();
     //Or auth.signInWithRedirect(twitterProvider)
@@ -173,6 +175,7 @@ const signInWithTwitter = () => {
       console.error(error);
     });
   }
+  */
 
   auth.onAuthStateChanged(user => {
     console.log(user);
