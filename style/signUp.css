@@ -1,0 +1,59 @@
+body {
+    background: rgba(0, 0, 0, 0.938);
+  }
+  
+  form {
+    text-align: center;
+    background-color: white;
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    border: 1px solid black;
+  }
+  #form-head {
+    font-size: 32px;
+    padding-top: 56px;
+    padding-bottom: 32px;
+  }
+  .social-icon {
+    width: 50px;
+    height: 50px;
+    padding: 16px 32px;
+  }
+  #social-line {
+    background-color: lightblue;
+    padding: 24px;
+  }
+  .input-box {
+    font-size: 18px;
+    padding-bottom: 12px;
+    margin-bottom: 36px;
+    border: 0;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    /*text-align: center;*/
+  }
+  #input-area {
+    padding: 80px 80px 40px 80px;
+  }
+  #btn {
+    background-color: rgba(245, 241, 10, 0.938);
+    padding: 12px 24px;
+    font-size: 18px;
+    color: white;
+    border: none;
+  }
+
+  #card {
+    position: relative;
+    top: 110px;
+    color: #000;
+    width: 320px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  
