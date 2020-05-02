@@ -6,6 +6,7 @@ if ("serviceWorker" in navigator) {
         .catch(err => console.log("service worker not registered", err))
     })
   }
+
   	/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 	function myFunction() {
     var x = document.getElementById("myTopnav");
@@ -15,3 +16,4 @@ if ("serviceWorker" in navigator) {
       x.className = "topnav";
     }
     }
+
