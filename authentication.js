@@ -1,5 +1,3 @@
-var firebase = require('firebase');
-
 
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');

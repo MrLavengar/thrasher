@@ -26,8 +26,8 @@
 		<a href="barcode-scanner.html">Scanner</a>
 		<a href="settings.html">Settings</a>
 		<a href="records.html">Records</a>
-        <a href="about.html">About</a>
-        <a href="index.html">Logout</a>
+    <a href="about.html">About</a>
+    <a href="index.html">Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
@@ -56,26 +56,51 @@
     <script src="firebaseConfig.js"></script>
     <script src="app.js"></script>
     <h3> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records</h3>
-    <input type="textfield" id="lookForMe" value="Type barcode # here" /><br>
-    <button id="saveButton">Search</button>
-    <button id="loadButton">Load All</button>
+    <input type="textfield" id="searchForMe" value="" /><br>
+    <button id="searchButton">Search</button>
+    <button id="loadAllButton">Load All</button>
     <script>
     
-
-
     var firestore = firebase.firestore();
-
-    const docRef = firestore.doc("products/101");
-
-    docRef.get().then(function(doc) {
-      if (doc && doc.exists){
-        const myData = doc.data();
-        outputFromDatabase.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n Container waste: " +
-        myData.wasteContainer;
-        }
-    })
+    const searchBarCode = document.querySelector("#searchForMe");
+    
+    
     
 
+    searchButton.addEventListener("click", function(){
+      const docRef = firestore.doc("products/" + searchBarCode.value);
+      console.log(searchBarCode.value);
+      docRef.get().then(function(doc) {
+        if (doc && doc.exists){
+          const myData = doc.data();
+          outputFromDatabase.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n Container waste: " +
+          myData.wasteContainer;
+          console.log(myData.barCode);
+          }
+      }).then(function() {
+      console.log("Record " + myData.barCode + " loaded!");
+      }).catch(function (error){
+      console.log("got an error: ", error);
+    });
+    })
+    
+    loadAllButton.addEventListener("click", function() {
+
+      console.log("I am going to load all record from database");
+      docRef.get().then(function(doc) {
+       if (doc && doc.exists){
+          const myData = doc.data();
+          outputFromDatabase.innerText = myData.authorName + "\n" + myData.bookTitle + "\n" +
+          myData.bookType + "\n" + myData.bookYear + "\n" + myData.isbn;
+        }
+      
+      }).then(function() {
+        console.log("All records loaded!");
+      }).catch(function (error){
+        console.log("got an error: ", error);
+      });
+    })
+    
 </script>
 
 
