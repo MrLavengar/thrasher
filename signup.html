@@ -6,7 +6,8 @@
 </head>
 
 <body>
-    <script src='./authentication.js'></script>
+    <script src="app.js"></script>
+    <script src='./firebaseConfig.js'></script>
   <div id="register-box">
     <div class="left-box">
       <h1> Sign Up </h1>
@@ -18,50 +19,6 @@
     </div>
   </div>
 
-
-  <script src="app.js"></script>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-  
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-       https://firebase.google.com/docs/web/setup#available-libraries -->
-  
-  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-  
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-  
-    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-  
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
-  
-<script>
-    var autho = localStorage['autho'];
-	localStorage.removeItem( 'autho' ); 
-    
-
-const signUpBtn = document.getElementById('signUp');
-const emailFieldR = document.getElementById('emailR');
-const passwordFieldR = document.getElementById('passwordR');
-   signUpFunction = () => {
-    const email = emailFieldR.value;
-    const password = passwordFieldR.value;
-
-    autho.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-        console.log('Signed Up Successfully !');
-    })
-    .catch(error => {
-        console.error(error);
-    });
-}
-
-signUpBtn.addEventListener('click', signUpFunction);
-
-</script>
 </body>
 
 </html>
