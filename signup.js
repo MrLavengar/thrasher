@@ -1,4 +1,4 @@
-/*
+
 
 const signUpBtn = document.getElementById('signUp');
 const emailFieldR = document.getElementById('emailR');
@@ -18,4 +18,3 @@ const passwordFieldR = document.getElementById('passwordR');
 
 signUpBtn.addEventListener('click', signUpFunction);
 
-*/

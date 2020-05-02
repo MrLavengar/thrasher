@@ -1,4 +1,6 @@
-/*
+var firebase = require('firebase');
+
+
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
 const signInWithMail = document.getElementById('signIn');
@@ -104,4 +106,3 @@ signInWithMail.addEventListener('click', signInWithEmailFunction);
 signInWithFacebookBtn.addEventListener('click', signInWithFacebook);
 
 signInWithTwitterBtn.addEventListener('click', signInWithTwitter);
-*/

@@ -31,8 +31,7 @@
     <div class="topnav" id="myTopnav">
 		<a href="main.html" class="active">Home</a>
 		<a href="barcode-scanner.html">Scanner</a>
-        <a href="settings.html">Settings</a>
-        <a href="records.html">Records</a>
+		<a href="settings.html">Settings</a>
 		<a href="about.html">About</a>
 		<a href="index.html">Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -75,6 +74,17 @@
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
     <script src="app.js"></script>
     <script type="text/javascript">
+        var database = firebase.database();
+
+        const dbRef = firebase.database().ref();
+        const productsRef = dbRef.child('products')
+        
+        barcodeExist =() => {
+            
+        }
+
+
+
         window.addEventListener('load', function () {
             let selectedDeviceId;
             const codeReader = new ZXing.BrowserBarcodeReader()
