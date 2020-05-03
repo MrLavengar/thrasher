@@ -104,7 +104,8 @@
           console.log(myData.barCode);
           
           } else {
-            window.location.replace("addrecord.html")
+            localStorage.setItem("result", searchBarCode.value);
+            window.location.replace("addRecord.html")
           }
       }).then(function() {
       console.log("Record with " + searchBarCode.value + " barcode loaded!");
