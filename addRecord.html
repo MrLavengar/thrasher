@@ -99,20 +99,7 @@
     const inputWasteContainer = document.querySelector("#wasteContainerHere");
     const addButton = document.querySelector("#addButton");
 
-    addButton.addEventListener("click", function() {
-        const docRef = firestore.doc("products/"+ localStorage.getItem('result'));
-        console.log("I am going to save details to FIRESTORE");
-        docRef.set({
-            name: inputName.value,
-            barCode: inputBarCode.value,
-            wasteContainer: inputWasteContainer.value,
-            photoURL: URL
-        }).then(function() {
-            console.log("status saved!");
-        }).catch(function (error){
-            console.log("got an error: ", error);
-        });
-    })      
+       
   
 
     
@@ -158,6 +145,22 @@
 
       
     });
+
+
+    addButton.addEventListener("click", function() {
+      const docRef = firestore.doc("products/"+ localStorage.getItem('result'));
+      console.log("I am going to save details to FIRESTORE");
+      docRef.set({
+          name: inputName.value,
+          barCode: inputBarCode.value,
+          wasteContainer: inputWasteContainer.value,
+          photoURL: URL
+      }).then(function() {
+          console.log("status saved!");
+      }).catch(function (error){
+          console.log("got an error: ", error);
+      });
+  })      
 
 
     window.addEventListener('load', function () {
