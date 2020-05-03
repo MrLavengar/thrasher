@@ -1,67 +1,130 @@
 <html>
 
 <head>
-  <title> Singup Form Design</title>
-  <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <title> Singup Form Design</title>
+    <link rel="stylesheet" type="text/css" href="style/signUp.css">
+    <link rel="stylesheet" type="text/css"  href="style/verificationEmail.css">
+
 </head>
 
 <body>
-    <script src='./authentication.js'></script>
-  <div id="register-box">
-    <div class="left-box">
-      <h1> Sign Up </h1>
-      <input id='usernameR'type="text" name="username" placeholder="Username"  />
-      <input id='emailR' type="text" name="email" placeholder="Email" required />
-      <input id='passwordR' type="password" name="password" placeholder="Password" #userPassword required />
-      <input type="password" name="password2" placeholder="Retype Password" />
-      <input id='signUp'type="submit" name="singup-button" placeholder="Sing Up">
-    </div>
-  </div>
+    <script src="app.js"></script>
+    <style>
+        
+    </style>
+  
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script> -->
 
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
 
-  <script src="app.js"></script>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-  
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-       https://firebase.google.com/docs/web/setup#available-libraries -->
-  
-  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-  
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+
+    <!---->
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-  
+
     <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-  
+
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+    <script src="firebaseConfig.js"></script>
+
   
-<script>
-    var autho = localStorage['autho'];
-	localStorage.removeItem( 'autho' ); 
-    
+  </div> 
+    <div class="container">
+        
+        <div class="d-flex justify-content-center h-45">
+        
+            <div class="card">
+                <div class="card-body">
+                   <h3 style="text-align: center;">Sign Up</h3> 
 
-const signUpBtn = document.getElementById('signUp');
-const emailFieldR = document.getElementById('emailR');
-const passwordFieldR = document.getElementById('passwordR');
-   signUpFunction = () => {
-    const email = emailFieldR.value;
-    const password = passwordFieldR.value;
+                    <form>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input id="usernameR" type="text" name="username" class="form-control"
+                                placeholder="username">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input id="emailR" type="email" class="form-control" placeholder="email">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input id="passwordR" type="password" class="form-control" placeholder="password">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input id="password2" type="password2" class="form-control" placeholder="password2">
+                        </div>
 
-    autho.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-        console.log('Signed Up Successfully !');
-    })
-    .catch(error => {
-        console.error(error);
-    });
-}
+                        <div class="form-group">
+                            <!-- dodalem do inputa onclick="location.href='main.html'" i zmieniłem typa z submit na button -->
+                            <input style="position: fixed;" id="signUp" type="button" value="Sign up" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+            </div class="card">
+        </div class="d-flex justify-content-center h-45">
+    </div class="container"> 
 
-signUpBtn.addEventListener('click', signUpFunction);
 
-</script>
+    <script>
+        const signUpBtn = document.getElementById('signUp');
+        const emailFieldR = document.getElementById('emailR');
+        const passwordFieldR = document.getElementById('passwordR');
+        
+        const signUpFunction = () => {
+            const email = emailFieldR.value;
+            const password = passwordFieldR.value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(() => {
+                    console.log('Signed Up Successfully !');
+                    sendVerificationEmail();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        signUpBtn.addEventListener('click', signUpFunction);
+
+        const sendVerificationEmail = () => {
+            //Built in firebase function responsible for sending the verification email
+            auth.currentUser.sendEmailVerification()
+                .then(() => {
+                    console.log('Verification Email Sent Successfully !');
+                    location.href = 'verificationEmail.html';
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+
+    </script>
+
 </body>
 
 </html>

@@ -55,6 +55,7 @@
 <body>
     <script src="firebaseConfig.js"></script>
     <script src="app.js"></script>
+
     <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
     <input type="textfield" id="searchForMe" value="" /><br>
     <button id="searchButton">Search</button>
@@ -67,10 +68,10 @@
         </thead>
     </table>
   
-    <script>
     
     var firestore = firebase.firestore();
     const searchBarCode = document.querySelector("#searchForMe");
+
     var cleanTable = document.getElementById("recordsTable").innerHTML;
 
     function hideTable(){
@@ -152,7 +153,42 @@
             }
       });
     
+
+
+    searchButton.addEventListener("click", function(){
+      const docRef = firestore.doc("products/" + searchBarCode.value);
+      console.log(searchBarCode.value);
+      docRef.get().then(function(doc) {
+        if (doc && doc.exists){
+          const myData = doc.data();
+          outputFromDatabase.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n Container waste: " +
+          myData.wasteContainer;
+          console.log(myData.barCode);
+          }
+      }).then(function() {
+      console.log("Record " + myData.barCode + " loaded!");
+      }).catch(function (error){
+      console.log("got an error: ", error);
+    });
+    })
     
+    loadAllButton.addEventListener("click", function() {
+
+      console.log("I am going to load all record from database");
+      docRef.get().then(function(doc) {
+       if (doc && doc.exists){
+          const myData = doc.data();
+          outputFromDatabase.innerText = myData.authorName + "\n" + myData.bookTitle + "\n" +
+          myData.bookType + "\n" + myData.bookYear + "\n" + myData.isbn;
+        }
+      
+      }).then(function() {
+        console.log("All records loaded!");
+      }).catch(function (error){
+        console.log("got an error: ", error);
+      });
+    })
+
 </script>
 
 
