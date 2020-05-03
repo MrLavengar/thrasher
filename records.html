@@ -50,22 +50,111 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
-<h1 id="outputFromDatabase">This is records page</h1>
+<h1 id="header">On this page you can look up records</h1>
 
 <body>
     <script src="firebaseConfig.js"></script>
     <script src="app.js"></script>
-    <h3> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records</h3>
-    <input type="textfield" id="searchForMe"  /><br>
+
+    <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
+    <input type="textfield" id="searchForMe" value="" /><br>
+
     <button id="searchButton">Search</button>
-    <button id="loadAllButton">Load All</button>
-    <script>
+    <button id="loadAllButton" >Load All</button>
+    <table id="recordsTable" border="2" cellpadding="10" >
+        <thead>
+            <th>Name</th>
+            <th>Bar code</th>
+            <th>Waste container</th>
+        </thead>
+    </table>
+  
     
     var firestore = firebase.firestore();
     const searchBarCode = document.querySelector("#searchForMe");
+
+    var cleanTable = document.getElementById("recordsTable").innerHTML;
+
+    function hideTable(){
+      document.getElementById("recordsTable").style.visibility= "hidden";
+    };
+
+    function showTable(){
+      document.getElementById("recordsTable").style.visibility= "visible";
+    };
+    hideTable();
+
+    function resetTable() {
+        var rowCount = recordsTable.rows.length;
+        for (var i = rowCount - 1; i > 0; i--) {
+          recordsTable.deleteRow(i);
+        }
+    }
+
+
+    searchButton.addEventListener("click", function(){
+      hideTable();
+      const docRef = firestore.doc("products/" + searchBarCode.value);
+      
+      docRef.get().then(function(doc) {
+        if (doc && doc.exists){
+          const myData = doc.data();
+          output.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n  Waste container: " +
+          myData.wasteContainer;
+          console.log(myData.barCode);
+          
+          }
+      }).then(function() {
+      console.log("Record with " + searchBarCode.value + " barcode loaded!");
+      }).catch(function (error){
+      console.log("got an error: ", error);
+    });
+    })
     
+    loadAllButton.addEventListener("click", function() {
+      console.log("startuje");
+      resetTable();
+      showTable();
+      firestore.collection('products').get().then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                  renderRecordsList(doc);
+                })
+            }).then(function() {
+                console.log("All record have been loaded");
+                }).catch(function (error){
+                console.log("got an error: ", error);
+             });
+
+             output.innerText="";
+             
+
+            const recordsList = document.querySelector('#recordsTable') ;
+            function renderRecordsList(doc){
+                let tr = document.createElement('tr');
+                let td_name = document.createElement('td');
+                let td_barCode = document.createElement('td');
+                let td_wasteContainer = document.createElement('td');
+
+
+
+                tr.setAttribute('data-id', doc.id);
+                td_name.textContent = doc.data().name;
+                td_barCode.textContent = doc.data().barCode;
+                td_wasteContainer.textContent = doc.data().wasteContainer;
+
+
+                tr.appendChild(td_name);
+                tr.appendChild(td_barCode);
+                tr.appendChild(td_wasteContainer);
+
+              
+                recordsList.appendChild(tr);
+
+
+            }
+      });
     
-    
+
 
     searchButton.addEventListener("click", function(){
       const docRef = firestore.doc("products/" + searchBarCode.value);
@@ -100,10 +189,15 @@
         console.log("got an error: ", error);
       });
     })
+
+
+</script>
+=======
     window.addEventListener('load', function () {
       var result=localStorage.getItem('result')
       document.getElementById('searchForMe').value = result
       console.log(result)})
+
 
 </script>
   
