@@ -27,7 +27,6 @@
 </head>
 <body>
 
-<script src='./authentication.js'></script>
 
 	<div class="topnav" id="myTopnav">
 		<a href="main.html" class="active">Home</a>
@@ -35,7 +34,7 @@
 		<a href="settings.html">Settings</a>
 		<a href="records.html">Records</a>
 		<a href="about.html">About</a>
-		<a id='logout' >Logout</a>
+		<a href="#" id='logout'>Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
@@ -240,11 +239,20 @@
 			.then(() => {
 				console.log('User signed out successfully !');
 				location.href = 'loggedOut.html';
+				localStorage.clear();
 			})
 			.catch(error => {
 				console.error(error);
 			});
 		  })
+
+		  auth.onAuthStateChanged(user => {
+			console.log(user);
+			
+			if(user.displayName)
+				console.log(user.displayName);
+		  });
+		  
 		  
 	</script>	
 				
