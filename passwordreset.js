@@ -1,7 +1,7 @@
 const emailField = document.getElementById('mail');
 const resetPassword = document.getElementById('resetPassword');
 
-const auth = firebase.auth();
+
 
 //auth.languageCode = 'DE_de';
 
