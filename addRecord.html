@@ -93,7 +93,9 @@
             barCode: inputBarCode.value,
             wasteContainer: inputWasteContainer.value,
 
-        }).then(function() {
+        });
+        window.location.replace("records.html")
+        .then(function() {
             console.log("status saved!");
         }).catch(function (error){
             console.log("got an error: ", error);
@@ -108,7 +110,7 @@
     window.addEventListener('load', function () {
       var result=localStorage.getItem('result')
       document.getElementById('barCodeHere').value = result
-      console.log(result)})
+      })
 
 
 </script>
