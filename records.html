@@ -66,6 +66,7 @@
             <th>Name</th>
             <th>Bar code</th>
             <th>Waste container</th>
+            <th>Image</th>
         </thead>
     </table>
   
@@ -137,6 +138,8 @@
                 let td_name = document.createElement('td');
                 let td_barCode = document.createElement('td');
                 let td_wasteContainer = document.createElement('td');
+                let td_wastePhoto = document.createElement('td');
+                let td_img = document.createElement("img");
 
 
 
@@ -144,11 +147,14 @@
                 td_name.textContent = doc.data().name;
                 td_barCode.textContent = doc.data().barCode;
                 td_wasteContainer.textContent = doc.data().wasteContainer;
+                td_img.src = doc.data().photoURL;
+                td_wastePhoto.appendChild(td_img);
 
 
                 tr.appendChild(td_name);
                 tr.appendChild(td_barCode);
                 tr.appendChild(td_wasteContainer);
+                tr.appendChild(td_wastePhoto);
 
               
                 recordsList.appendChild(tr);
