@@ -8,7 +8,99 @@
 
 <head>
 	<title>Main page</title>
-	<script src="jquery-3.4.1.min.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            height: 100vh;
+          }
+          
+          h1 {
+            text-align: center;
+            font-family: Tahoma, Arial, sans-serif;
+            color: #06D85F;
+            margin: 80px 0;
+          }
+          
+          .box {
+            width: 40%;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.2);
+            padding: 35px;
+            border: 2px solid #fff;
+            border-radius: 20px/50px;
+            background-clip: padding-box;
+            text-align: center;
+          }
+          
+          .button {
+            font-size: 1em;
+            padding: 10px;
+        
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+          }
+          
+          .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+          }
+          .overlay:target {
+            visibility: visible;
+            opacity: 1;
+          }
+          
+          .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+          }
+          
+          .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+          }
+          .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+          }
+          
+          .popup .content {
+            max-height: 30%;
+            overflow: auto;
+          }
+          
+          @media screen and (max-width: 700px){
+            .box{
+              width: 70%;
+            }
+            .popup{
+              width: 70%;
+            }
+          }
+
+
+
+    </style>
 
 
 
@@ -89,7 +181,7 @@
 
 				<div class="container content clear-fix">
 
-					<h2 class="mt-5 mb-5">Profile Settings</h2>
+					<h2 class="mt-5 mb-5">Edit Profile</h2>
 
 					<div class="row" style="height:100%">
 
@@ -115,19 +207,41 @@
 									<div class="form-group">
 
 										<label for=fullName>Username</label>
-										<p id='username'></p>
+										<input type="text" class="form-control" id="username">
 
 									</div>
 									<div class="form-group">
 
 										<label for=email>Email</label>
-										<p id='email'></p>
+										<input type="email" class="form-control" id="email">
+
 									</div>
 
 
 									<div class="row mt-5">
 
-						
+										<div class="col box">
+
+											<button type="button" id="submit" href="#popup1" class="btn btn-primary btn-block"><a class="button" href="#popup1">Save changes</a></button>
+
+										</div>
+
+										<div class="col box ">
+
+											<button type="button" class="btn btn-default btn-block box ">Cancel</button>
+                                
+
+                                        </div>
+                                        
+                                        <div id="popup1" class="overlay">
+                                            <div class="popup">
+                                                <h2></h2>
+                                                <a class="close" href="#">&times;</a>
+                                                <div class="content">
+                                                    The user data has been changed successfully!
+                                                </div>
+                                            </div>
+                                        </div>
 
 									</div>
 
@@ -148,59 +262,38 @@
 	</div>
 	<script>
 
-		var usernameField = document.getElementById('username');
-		var emailField = document.getElementById('email');
-
+		const usernameField = document.getElementById('username');
+		const emailField = document.getElementById('email');
+		const passwordField = document.getElementById('password');
+		const subBtn = document.getElementById("submit");
 
 
 
 		var user = firebase.auth().currentUser;
 		var uNameValue = usernameField.value;
 		var emailValue = emailField.value;
-		
 
 		auth.onAuthStateChanged(user => {
-			if(user.displayName !== null){
-
-			usernameField.textContent = user.displayName;
-			emailField.textContent = user.email;
-			
-			}
-			else {
-				var eemail = user.email;
-				var emailToUser= eemail.substr(0, eemail.indexOf('@'));
-
-
-				usernameField.textContent = emailToUser;
-				emailField.textContent = user.email;
+			const updateProfile = () => {
+				user.updateProfile({
+					displayName: uNameValue.value,
+					email: emailValue.value	
+				}).then( function (){
+					console.log('done');
+                    
+				})
 			}
 
+			subBtn.addEventListener('click', updateProfile);
 
 
 			
 
 				var colours = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
-				if(user.displayName !== null){
-				var name = user.displayName,
-					nameSplit = name.split(" "),
-					initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
-				}
-				else {
-					initials = makeid(2);
-				}
-
-				localStorage.setItem('selected', initials);
+                
+                var initials = localStorage.getItem('selected');
 
 
-				function makeid(length) {
-					var result           = '';
-					var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-					var charactersLength = characters.length;
-					for ( var i = 0; i < length; i++ ) {
-					   result += characters.charAt(Math.floor(Math.random() * charactersLength));
-					}
-					return result;
-				 }
 				var charIndex = initials.charCodeAt(0) - 65,
 					colourIndex = charIndex % 19;
 
