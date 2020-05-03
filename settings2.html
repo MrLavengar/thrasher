@@ -279,7 +279,9 @@
 					displayName: uNameValue.value,
 					email: emailValue.value	
 				}).then( function (){
-					console.log('done');
+                    console.log('done');
+                    usernameField.value = "";
+                    emailField.value= " ";
                     
 				})
 			}
