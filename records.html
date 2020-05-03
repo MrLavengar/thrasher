@@ -59,6 +59,7 @@
     <script src="app.js"></script>
 
     <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
+    <p id="imige"></p>
     <input  type="textfield" id="searchForMe" value="" /><br>
 
     <button id="searchButton">Search</button>
@@ -97,6 +98,7 @@
 
     searchButton.addEventListener("click", function(){
       hideTable();
+      let imidz = document.getElementById("imige");
       
       const docRef = firestore.doc("products/" + searchBarCode.value);
         docRef.get().then(function(doc) {
@@ -104,6 +106,12 @@
           const myData = doc.data();
           output.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n  Waste container: " +
           myData.wasteContainer;
+
+          let imid = document.createElement("img");
+          imid.src = doc.data().photoURL;
+          imidz.appendChild(imid);
+          
+
           console.log(myData.barCode);
           
           } else {
