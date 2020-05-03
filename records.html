@@ -58,6 +58,7 @@
 
     <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
     <input type="textfield" id="searchForMe" value="" /><br>
+
     <button id="searchButton">Search</button>
     <button id="loadAllButton" >Load All</button>
     <table id="recordsTable" border="2" cellpadding="10" >
@@ -189,8 +190,17 @@
       });
     })
 
-</script>
 
+</script>
+=======
+    window.addEventListener('load', function () {
+      var result=localStorage.getItem('result')
+      document.getElementById('searchForMe').value = result
+      console.log(result)})
+
+
+</script>
+  
 
 
 	

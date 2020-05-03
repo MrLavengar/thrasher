@@ -66,7 +66,7 @@
 
             <label>Result:</label>
             <pre><code id="result"></code></pre>
-            <button class='btn-success' id='save 'style='color:White'>Save</button>
+            <div id='button-save' style='display: none;'><a href='records.html'><button class='btn-success' id='save 'style='color:White;'>Go to finder</button></a></div>
             
         </section>
 
@@ -103,7 +103,11 @@
                         codeReader.decodeOnceFromVideoDevice(selectedDeviceId, 'video').then((result) => {
                             console.log(result)
                             document.getElementById('result').textContent = result.text
+                            localStorage.setItem("result", result)
+                            document.getElementById("button-save").style.display=''
+                            
                         }).catch((err) => {
+                            document.getElementById("button-save").style.display='none'
                             console.error(err)
                             document.getElementById('result').textContent = err
                         })
