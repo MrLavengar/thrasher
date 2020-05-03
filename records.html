@@ -56,7 +56,7 @@
     <script src="firebaseConfig.js"></script>
     <script src="app.js"></script>
     <h3> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records</h3>
-    <input type="textfield" id="searchForMe" value="" /><br>
+    <input type="textfield" id="searchForMe"  /><br>
     <button id="searchButton">Search</button>
     <button id="loadAllButton">Load All</button>
     <script>
@@ -100,9 +100,13 @@
         console.log("got an error: ", error);
       });
     })
-    
-</script>
+    window.addEventListener('load', function () {
+      var result=localStorage.getItem('result')
+      document.getElementById('searchForMe').value = result
+      console.log(result)})
 
+</script>
+  
 
 
 	
