@@ -104,6 +104,7 @@
           console.log(myData.barCode);
           
           } else {
+            localStorage.setItem("result", searchBarCode.value);
             window.location.replace("addRecord.html")
           }
       }).then(function() {
