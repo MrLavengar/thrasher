@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Records</title>
+  <title>Records</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
    
 	<!--Bootsrap 4 CDN-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -57,16 +59,16 @@
     <script src="app.js"></script>
 
     <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
-    <input type="textfield" id="searchForMe" value="" /><br>
+    <input  type="textfield" id="searchForMe" value="" /><br>
 
     <button id="searchButton">Search</button>
     <button id="loadAllButton" >Load All</button>
-    <table id="recordsTable" border="2" cellpadding="10" >
+    <table class="table-dark" id="recordsTable" border="2" cellpadding="10" >
         <thead>
-            <th>Name</th>
-            <th>Bar code</th>
-            <th>Waste container</th>
-            <th>Image</th>
+            <th scope="row">Name</th>
+            <th scope="row">Bar code</th>
+            <th scope="row">Waste container</th>
+            <th scope="row">Image</th>
         </thead>
     </table>
   
@@ -159,6 +161,12 @@
               
                 recordsList.appendChild(tr);
 
+                let inputFiel = document.getElementById('searchForMe');
+                let loadAllBut = document.getElementById('loadAllButton');
+                let searchBtn = document.getElementById('searchButton');
+                inputFiel.style.visibility = "hidden";
+                loadAllBut.style.visibility = "hidden";
+                searchBtn.style.visibility = "hidden";
 
             }
       });
