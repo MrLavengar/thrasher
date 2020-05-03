@@ -94,15 +94,17 @@
 
     searchButton.addEventListener("click", function(){
       hideTable();
-      const docRef = firestore.doc("products/" + searchBarCode.value);
       
-      docRef.get().then(function(doc) {
+      const docRef = firestore.doc("products/" + searchBarCode.value);
+        docRef.get().then(function(doc) {
         if (doc && doc.exists){
           const myData = doc.data();
           output.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n  Waste container: " +
           myData.wasteContainer;
           console.log(myData.barCode);
           
+          } else {
+            window.location.replace("addrecord.html")
           }
       }).then(function() {
       console.log("Record with " + searchBarCode.value + " barcode loaded!");
@@ -153,45 +155,6 @@
 
             }
       });
-    
-
-
-    searchButton.addEventListener("click", function(){
-      const docRef = firestore.doc("products/" + searchBarCode.value);
-      console.log(searchBarCode.value);
-      docRef.get().then(function(doc) {
-        if (doc && doc.exists){
-          const myData = doc.data();
-          outputFromDatabase.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n Container waste: " +
-          myData.wasteContainer;
-          console.log(myData.barCode);
-          }
-      }).then(function() {
-      console.log("Record " + myData.barCode + " loaded!");
-      }).catch(function (error){
-      console.log("got an error: ", error);
-    });
-    })
-    
-    loadAllButton.addEventListener("click", function() {
-
-      console.log("I am going to load all record from database");
-      docRef.get().then(function(doc) {
-       if (doc && doc.exists){
-          const myData = doc.data();
-          outputFromDatabase.innerText = myData.authorName + "\n" + myData.bookTitle + "\n" +
-          myData.bookType + "\n" + myData.bookYear + "\n" + myData.isbn;
-        }
-      
-      }).then(function() {
-        console.log("All records loaded!");
-      }).catch(function (error){
-        console.log("got an error: ", error);
-      });
-    })
-
-
-
 
     window.addEventListener('load', function () {
       var result=localStorage.getItem('result')

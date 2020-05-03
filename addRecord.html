@@ -1,0 +1,121 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Records</title>
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./style/main.css">
+</head>
+<body>
+
+	<div class="topnav" id="myTopnav">
+		<a href="main.html" class="active">Home</a>
+		<a href="barcode-scanner.html">Scanner</a>
+		<a href="settings.html">Settings</a>
+		<a href="records.html">Records</a>
+    <a href="about.html">About</a>
+    <a href="index.html">Logout</a>
+		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+		  <i class="fa fa-bars"></i>
+		</a>
+	  </div>
+
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+
+<h1 id="header">Adding Record</h1>
+
+<body>
+    <script src="firebaseConfig.js"></script>
+    <script src="app.js"></script>
+
+    <p id="output"> Please fill below fields to add record.<br></p>
+
+    <p>Barcode:</p>
+    
+    <input type="textfield" id="barCodeHere" value="" disabled/>
+    <br><br>
+    <p>Name:</p>
+    
+    <input type="textfield" id="nameTextHere" value="" />
+    <br>
+    <br>
+    <p>Choose waste container from the list:</p>
+    <select id="wasteContainerHere">
+        <option value="yellow">yellow</option>
+        <option value="green">green</option>
+        <option value="blue">blue</option>
+        <option value="brown">brown</option>
+        <option value="black">black</option>
+      </select>
+    <button id="addButton">Add</button>
+  
+    <script>
+    var firestore = firebase.firestore();
+
+    const inputName = document.querySelector("#nameTextHere");
+    const inputBarCode = document.querySelector("#barCodeHere");
+    const inputWasteContainer = document.querySelector("#wasteContainerHere");
+    const addButton = document.querySelector("#addButton");
+
+    addButton.addEventListener("click", function() {
+        const docRef = firestore.doc("products/"+ localStorage.getItem('result'));
+        console.log("I am going to save details to FIRESTORE");
+        docRef.set({
+            name: inputName.value,
+            barCode: inputBarCode.value,
+            wasteContainer: inputWasteContainer.value,
+
+        }).then(function() {
+            console.log("status saved!");
+        }).catch(function (error){
+            console.log("got an error: ", error);
+        });
+    })      
+
+    
+    
+
+
+
+    window.addEventListener('load', function () {
+      var result=localStorage.getItem('result')
+      document.getElementById('barCodeHere').value = result
+      console.log(result)})
+
+
+</script>
+  
+
+
+	
+</script>
+</body>
+</html>
