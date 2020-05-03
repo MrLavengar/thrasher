@@ -93,10 +93,10 @@
             barCode: inputBarCode.value,
             wasteContainer: inputWasteContainer.value,
 
-        });
-        window.location.replace("records.html")
-        .then(function() {
+        }).then(function() {
             console.log("status saved!");
+        }).then (function(){
+          window.location.replace("records.html");
         }).catch(function (error){
             console.log("got an error: ", error);
         });
