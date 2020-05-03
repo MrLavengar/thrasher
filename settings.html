@@ -25,9 +25,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./style/main.css">
 	<link rel="stylesheet" href="./style/userSettings.css">
+	
+	
 </head>
 
 <body>
+	<script src="app.js"></script>
 
 
 
@@ -50,11 +53,15 @@
 		<a href="settings.html">Settings</a>
 		<a href="records.html">Records</a>
 		<a href="about.html">About</a>
-		<a href="index.html">Logout</a>
+		<a href="#" id='logout'>Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
-			<i class="fa fa-bars"></i>
+		  <i class="fa fa-bars"></i>
 		</a>
-	</div>
+	  </div>
+
+	
+
+
 
 	<div class="container-fluid main" style="height:100vh;padding-left:0px;">
 
@@ -123,6 +130,7 @@
 										<label for=email>Email</label>
 										<p id='email'></p>
 									</div>
+									
 
 
 									<div class="row mt-5">

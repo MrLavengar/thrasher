@@ -116,7 +116,10 @@
 	<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./style/main.css">
-	<link rel="stylesheet" href="./style/userSettings.css">
+    <link rel="stylesheet" href="./style/userSettings.css">
+    
+    
+
 </head>
 
 <body>
@@ -215,7 +218,10 @@
 										<label for=email>Email</label>
 										<input type="email" class="form-control" id="email">
 
-									</div>
+                                    </div>
+                                    <div>
+                                        <button id="reset">Reset password</button>
+                                    </div>
 
 
 									<div class="row mt-5">
@@ -266,12 +272,15 @@
 		const emailField = document.getElementById('email');
 		const passwordField = document.getElementById('password');
 		const subBtn = document.getElementById("submit");
-
+        const resetBtn = document.getElementById("reset");
+        
 
 
 		var user = firebase.auth().currentUser;
 		var uNameValue = usernameField.value;
-		var emailValue = emailField.value;
+        var emailValue = emailField.value;
+        
+
 
 		auth.onAuthStateChanged(user => {
 			const updateProfile = () => {
@@ -279,10 +288,26 @@
 					displayName: uNameValue.value,
 					email: emailValue.value	
 				}).then( function (){
-					console.log('done');
+                    console.log('done');
+                    usernameField.value = "";
+                    emailField.value= " ";
                     
-				})
-			}
+                })
+                
+            }
+            let user2 = Promise.resolve(user);
+
+            const resetPassword = () =>{
+                auth.sendPasswordResetEmail(user.email).then(function() {
+                    location.href='passwordReset.html';
+
+                }).catch(function(error) {
+                  console.log(error);
+                });
+            }
+
+
+            resetBtn.addEventListener('click', resetPassword);
 
 			subBtn.addEventListener('click', updateProfile);
 
@@ -321,7 +346,8 @@
 				context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);
 
 
-			})
+            })
+            
 
 
 

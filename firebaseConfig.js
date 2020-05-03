@@ -14,3 +14,5 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth(); 
+var storage = firebase.storage();
+
