@@ -69,6 +69,7 @@
             <th scope="row">Name</th>
             <th scope="row">Bar code</th>
             <th scope="row">Waste container</th>
+            <th scope="row">Photo</th>
            <!-- <th scope="row">Image</th>-->
         </thead>
     </table>
@@ -150,6 +151,8 @@
                 let td_wasteContainer = document.createElement('td');
                 let td_wastePhoto = document.createElement('td');
                 let td_img = document.createElement("img");
+                td_img.style.height='250px';
+                td_img.style.width='200px';
 
 
 
@@ -157,14 +160,15 @@
                 td_name.textContent = doc.data().name;
                 td_barCode.textContent = doc.data().barCode;
                 td_wasteContainer.textContent = doc.data().wasteContainer;
-               // td_img.src = doc.data().photoURL;
-                //td_wastePhoto.appendChild(td_img);
+                td_img.src = doc.data().photoURL;
+                td_wastePhoto.appendChild(td_img);
+                
 
 
                 tr.appendChild(td_name);
                 tr.appendChild(td_barCode);
                 tr.appendChild(td_wasteContainer);
-               // tr.appendChild(td_wastePhoto);
+                tr.appendChild(td_wastePhoto);
 
               
                 recordsList.appendChild(tr);
