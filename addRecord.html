@@ -54,6 +54,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>       
 
 
+    
+
+
 <h1 id="header">Adding Record</h1>
 
 <body>
@@ -148,14 +151,22 @@
     });
 
 
+
+
     addButton.addEventListener("click", function() {
       const docRef = firestore.doc("products/"+ localStorage.getItem('result'));
       console.log("I am going to save details to FIRESTORE");
+      let currentUser = firebase.auth().currentUser;
+      let currentUserID;
+      if ( currentUser != null) {
+        currentUserID = currentUser.uid;  
+      }
       docRef.set({
           name: inputName.value,
           barCode: inputBarCode.value,
           wasteContainer: inputWasteContainer.value,
-          photoURL: URL
+          photoURL: URL,
+          userID: currentUserID,
       }).then(function() {
           console.log("status saved!");
       }).catch(function (error){
