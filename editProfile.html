@@ -28,6 +28,21 @@
 
 <body>
 
+    <div class="topnav" id="myTopnav">
+		<a href="main.html" class="active">Home</a>
+		<a href="barcode-scanner.html">Scanner</a>
+		<a href="settings.html">Settings</a>
+		<a href="records.html">Records</a>
+        <a href="about.html">About</a>
+        <a href="loggedOut.html" id='logout'>Logout</a>
+		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+		  <i class="fa fa-bars"></i>
+		</a>
+      </div>
+      
+<script src="app.js"></script>
+
+
 
 
     <!---->
@@ -57,8 +72,8 @@
                     </div>
                     <div class="wizard">
                         <nav class="list-group list-group-flush">
-                            <a class="list-group-item"><i class="fe-icon-user text-muted"></i>User details </a>
-                            <a class="list-group-item" href="profileInfo.html">
+                            <a class="list-group-item" href="profileInfo.html" ><i class="fe-icon-user text-muted" ></i>User details </a>
+                            <a class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                         <div class="d-inline-block font-weight-medium text-uppercase">Edit Profile</div>
@@ -132,6 +147,9 @@
                 </div>
             </div>
         </div>
+    </div>
+
+        
 
 
         <script>
@@ -261,7 +279,5 @@
 
                 })
         </script>
-
-</body>
-
+        </body>
 </html>
