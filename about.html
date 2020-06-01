@@ -35,34 +35,30 @@
 		<a href="settings.html">Settings</a>
 		<a href="records.html">Records</a>
         <a href="about.html">About</a>
-        <a id='logout'>Logout</a>
+        <a href="logg" id='logout'>Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
 	  </div>
 
-<h1>This is about page</h1>
 
 
 
-<script src="app.js">
 
-	const logOut = document.getElementById('logout');
-
-
-	logOut.addEventListener('click', () => {
-		auth.signOut()
-		.then(() => {
-			console.log('User signed out successfully !');
-			location.href = 'loggedOut.html';
-			localStorage.clear();
-		})
-		.catch(error => {
-			console.error(error);
-		});
-	  })
+<script src="app.js"></script>
 
 	
-</script>
+	<div class='main' style='margin: 1em'>
+		<h1>What?</h1>
+		<p>The 'Thrasher' progressive web app</p>
+		<h1>Why?</h1>
+		<p>Because this application will help you take care of our planet. It will not only help you to idenitify to which container your trash should be trown in
+			but it will allow you to help other people and correct them if they are mistaken. The main goal of Trasher is to show everyone
+			how thrashed should be recycled by choosing correct waste container
+		</p>
+		<h1>How?</h1>
+		<p>It's simple. Just scan the barcode of a trash, and try to find it in our database. If it not exist, just add as a new trash to help other poeple recognize it in the future.</p>
+		</div>
+
 </body>
 </html>

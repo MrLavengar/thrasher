@@ -29,7 +29,7 @@
 		<a href="settings.html">Settings</a>
 		<a href="records.html">Records</a>
     <a href="about.html">About</a>
-    <a href="index.html">Logout</a>
+    <a href="loggedOut.html" id='logout'>Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
@@ -59,6 +59,7 @@
     <script src="app.js"></script>
 
     <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
+    <p id="imige"></p>
     <input  type="textfield" id="searchForMe" value="" /><br>
 
     <button id="searchButton">Search</button>
@@ -68,7 +69,7 @@
             <th scope="row">Name</th>
             <th scope="row">Bar code</th>
             <th scope="row">Waste container</th>
-            <th scope="row">Image</th>
+           <!-- <th scope="row">Image</th>-->
         </thead>
     </table>
   
@@ -97,6 +98,7 @@
 
     searchButton.addEventListener("click", function(){
       hideTable();
+      let imidz = document.getElementById("imige");
       
       const docRef = firestore.doc("products/" + searchBarCode.value);
         docRef.get().then(function(doc) {
@@ -104,6 +106,12 @@
           const myData = doc.data();
           output.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n  Waste container: " +
           myData.wasteContainer;
+
+          let imid = document.createElement("img");
+          imid.src = doc.data().photoURL;
+          imidz.appendChild(imid);
+          
+
           console.log(myData.barCode);
           
           } else {
@@ -149,14 +157,14 @@
                 td_name.textContent = doc.data().name;
                 td_barCode.textContent = doc.data().barCode;
                 td_wasteContainer.textContent = doc.data().wasteContainer;
-                td_img.src = doc.data().photoURL;
-                td_wastePhoto.appendChild(td_img);
+               // td_img.src = doc.data().photoURL;
+                //td_wastePhoto.appendChild(td_img);
 
 
                 tr.appendChild(td_name);
                 tr.appendChild(td_barCode);
                 tr.appendChild(td_wasteContainer);
-                tr.appendChild(td_wastePhoto);
+               // tr.appendChild(td_wastePhoto);
 
               
                 recordsList.appendChild(tr);
