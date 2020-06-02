@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+
   <title>Records</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -18,10 +18,25 @@
 
 	<!--Custom styles-->
 	<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="./style/main.css">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+
+  <link rel="stylesheet" href="./style/main.css">
+  
+
 <body>
+
+  <script src="firebaseConfig.js"></script>
+  <script src="app.js"></script>
+
 
 	<div class="topnav" id="myTopnav">
 		<a href="main.html" class="active">Home</a>
@@ -33,167 +48,78 @@
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
-	  </div>
+    </div>
 
+    <table id="dtBasicExample" id="allRecords" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th class="th-sm">Name
+          </th>
+          <th class="th-sm">Container
+          </th>
+          <th class="th-sm">Photo
+          </th>
+        </tr>
+      </thead>
+        </table>
 
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
-  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-
-  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-
-  <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
-
-<h1 id="header">On this page you can look up records</h1>
-
-<body>
-    <script src="firebaseConfig.js"></script>
-    <script src="app.js"></script>
-
-    <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
-    <p id="imige"></p>
-    <input  type="textfield" id="searchForMe" value="" /><br>
-
-    <button id="searchButton">Search</button>
-    <button id="loadAllButton" >Load All</button>
-    <table class="table-dark" id="recordsTable" border="2" cellpadding="10" >
-        <thead>
-            <th scope="row">Name</th>
-            <th scope="row">Bar code</th>
-            <th scope="row">Waste container</th>
-            <th scope="row">Photo</th>
-           <!-- <th scope="row">Image</th>-->
-        </thead>
-    </table>
-  
-    <script>
-    var firestore = firebase.firestore();
-    const searchBarCode = document.querySelector("#searchForMe");
-
-    var cleanTable = document.getElementById("recordsTable").innerHTML;
-
-    function hideTable(){
-      document.getElementById("recordsTable").style.visibility= "hidden";
-    };
-
-    function showTable(){
-      document.getElementById("recordsTable").style.visibility= "visible";
-    };
-    hideTable();
-
-    function resetTable() {
-        var rowCount = recordsTable.rows.length;
-        for (var i = rowCount - 1; i > 0; i--) {
-          recordsTable.deleteRow(i);
-        }
-    }
-
-
-    searchButton.addEventListener("click", function(){
-      hideTable();
-      let imidz = document.getElementById("imige");
-      
-      const docRef = firestore.doc("products/" + searchBarCode.value);
-        docRef.get().then(function(doc) {
-        if (doc && doc.exists){
-          const myData = doc.data();
-          output.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n  Waste container: " +
-          myData.wasteContainer;
-
-          let imid = document.createElement("img");
-          imid.src = doc.data().photoURL;
-          imidz.appendChild(imid);
-          
-
-          console.log(myData.barCode);
-          
-          } else {
-            localStorage.setItem("result", searchBarCode.value);
-            window.location.replace("addRecord.html")
-          }
-      }).then(function() {
-      console.log("Record with " + searchBarCode.value + " barcode loaded!");
-      }).catch(function (error){
-      console.log("got an error: ", error);
-    });
-    })
+        
     
-    loadAllButton.addEventListener("click", function() {
-      console.log("startuje");
-      resetTable();
-      showTable();
-      firestore.collection('products').get().then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                  renderRecordsList(doc);
-                })
-            }).then(function() {
-                console.log("All record have been loaded");
-                }).catch(function (error){
-                console.log("got an error: ", error);
-             });
+    <script>
+     
+      var firestore = firebase.firestore();
 
-             output.innerText="";
-             
+      function fillTable(){
+        firestore.collection('products').get().then((snapshot) => {
+          snapshot.docs.forEach(doc => {
+            renderRecordsList(doc);
+          })
+      }).then(function() {
+          console.log("All record have been loaded");
+          }).catch(function (error){
+          console.log("got an error: ", error);
+       });
+        }
 
-            const recordsList = document.querySelector('#recordsTable') ;
-            function renderRecordsList(doc){
-                let tr = document.createElement('tr');
-                let td_name = document.createElement('td');
-                let td_barCode = document.createElement('td');
-                let td_wasteContainer = document.createElement('td');
-                let td_wastePhoto = document.createElement('td');
-                let td_img = document.createElement("img");
-                td_img.style.height='250px';
-                td_img.style.width='200px';
+        const recordsList = document.querySelector('#allRecords') ;
+        function renderRecordsList(doc){
+            let tr = document.createElement('tr');
+            let td_name = document.createElement('td');
+            let td_wasteContainer = document.createElement('td');
+            let td_wastePhoto = document.createElement('td');
+            let td_img = document.createElement("img");
+            td_img.style.height='250px';
+            td_img.style.width='200px';
 
 
 
-                tr.setAttribute('data-id', doc.id);
-                td_name.textContent = doc.data().name;
-                td_barCode.textContent = doc.data().barCode;
-                td_wasteContainer.textContent = doc.data().wasteContainer;
-                td_img.src = doc.data().photoURL;
-                td_wastePhoto.appendChild(td_img);
-                
+            tr.setAttribute('data-id', doc.id);
+            td_name.textContent = doc.data().name;
+            td_wasteContainer.textContent = doc.data().wasteContainer;
+            td_img.src = doc.data().photoURL;
+            td_wastePhoto.appendChild(td_img);
+            
 
 
-                tr.appendChild(td_name);
-                tr.appendChild(td_barCode);
-                tr.appendChild(td_wasteContainer);
-                tr.appendChild(td_wastePhoto);
+            tr.appendChild(td_name);
+            tr.appendChild(td_wasteContainer);
+            tr.appendChild(td_wastePhoto);
 
-              
-                recordsList.appendChild(tr);
+          
+            recordsList.appendChild(tr);
 
-                let inputFiel = document.getElementById('searchForMe');
-                let loadAllBut = document.getElementById('loadAllButton');
-                let searchBtn = document.getElementById('searchButton');
-                inputFiel.style.visibility = "hidden";
-                loadAllBut.style.visibility = "hidden";
-                searchBtn.style.visibility = "hidden";
+          }
 
-            }
-      });
+          window.onload = function() {
+            fillTable();
+          }
 
-    window.addEventListener('load', function () {
-      var result=localStorage.getItem('result')
-      document.getElementById('searchForMe').value = result
-      console.log(result)})
+      
 
 
-</script>
-  
+
+    </script>
 
 
-	
-</script>
 </body>
 </html>
