@@ -30,6 +30,8 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
   <link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/container.css">
+
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -134,7 +136,8 @@ crossorigin="anonymous"></script>
 
             tr.setAttribute('data-id', doc.id);
             td_name.textContent = doc.data().name;
-           td_wasteContainer.textContent = doc.data().wasteContainer;
+           //td_wasteContainer.textContent = doc.data().wasteContainer;
+           td_wasteContainer.innerHTML += "<section> <span class= 'trash'> <span></span> <i></i></span> </section>";
            td_img.src = doc.data().photoURL;
            td_wastePhoto.appendChild(td_img);
             
