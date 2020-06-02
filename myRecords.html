@@ -6,170 +6,287 @@
 <!DOCTYPE html>
 <html>
 
-  <title>Records</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-   
-	<!--Bootsrap 4 CDN-->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
-    <!--Fontawesome CDN-->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-	<!--Custom styles-->
-	<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-
-  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-
-  <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
-
-  <link rel="stylesheet" href="./style/main.css">
-  <link rel="stylesheet" href="./style/container.css">
+<title>Records</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Tables</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!--Bootsrap 4 CDN-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-  <script
-src="http://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
+<!--Fontawesome CDN-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<!--Custom styles-->
+<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+
+<link rel="stylesheet" href="./style/main.css">
+<link rel="stylesheet" href="./style/container.css">
+<link rel="stylesheet" type="text/css" href="./style/profile.css">
+
+
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Data Tables</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+  integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+  integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
-  
+
 
 <body>
 
   <script src="firebaseConfig.js"></script>
   <script src="app.js"></script>
 
-  
 
 
 
 
-	<div class="topnav" id="myTopnav">
-		<a href="main.html" class="active">Home</a>
-		<a href="barcode-scanner.html">Scanner</a>
-		<a href="settings.html">Settings</a>
-		<a href="records.html">Records</a>
+
+  <div class="topnav" id="myTopnav">
+    <a href="main.html" class="active">Home</a>
+    <a href="barcode-scanner.html">Scanner</a>
+		<a href="profileInfo.html">Settings</a>
+    <a href="records.html">Records</a>
     <a href="about.html">About</a>
     <a href="loggedOut.html" id='logout'>Logout</a>
-		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
-		  <i class="fa fa-bars"></i>
-		</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-4 pb-5">
+        <!-- Account Sidebar-->
+        <div class="author-card pb-3">
+          
+          <div class="wizard">
+            <nav class="list-group list-group-flush">
+              <a class="list-group-item"><i class="fe-icon-user text-muted"></i>User details </a>
+              <a class="list-group-item" href="editProfile.html">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div><i class="fe-icon-tag mr-1 text-muted"></i>
+                    <div class="d-inline-block font-weight-medium text-uppercase">Edit Profile</div>
+                  </div>
+                </div>
+              </a>
+              <a class="list-group-item" href="myRecords.html">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div><i class="fe-icon-tag mr-1 text-muted"></i>
+                    <div class="d-inline-block font-weight-medium text-uppercase">My records</div>
+                  </div>
+                </div>
+              </a>
+            </nav>
+          </div>
+        </div>
+        <!-- Profile Settings-->
+        <div class="container">
+          <table class="table table-fluid" id="myTable">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Container</th>
+              </tr>
+            </thead>
+            <tbody id="recordsBody">
+    
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
     </div>
 
-    <div class="container">
-      <h2>My Records</h2>
-      <table class="table table-fluid" id="myTable">
-      <thead>
-      <tr><th>Photo</th><th>Name</th><th>Container</th></tr>
-      </thead>
-      <tbody id="recordsBody">
-   
-      </tbody>
-      </table>
-  </div>
-  
-<script>
 
-        
+    <script>
+
+
       var firestore = firebase.firestore();
       window.setTimeout(getDatas, 2000);//add this line for timer with ur function for load datas
 
 
-      function fillTable(){
+      function fillTable() {
         console.log("startuje");
 
         firestore.collection('products').get().then((snapshot) => {
           snapshot.docs.forEach(doc => {
             renderRecordsList(doc);
           })
-      }).then(function() {
+        }).then(function () {
           console.log("All record have been loaded");
-          }).catch(function (error){
+        }).catch(function (error) {
           console.log("got an error: ", error);
-       });
+        });
       }
 
       // output.innerText="";
 
 
-       const recordsList = document.querySelector('#myTable');
-       const recordsBody = document.querySelector('#recordsBody');
-       let currentUser = firebase.auth().currentUser;
-       if ( currentUser != null) {
-        currentUserID = currentUser.uid;  
+      const recordsList = document.querySelector('#myTable');
+      const recordsBody = document.querySelector('#recordsBody');
+      let currentUser = firebase.auth().currentUser;
+      if (currentUser != null) {
+        currentUserID = currentUser.uid;
       }
-        console.log(recordsList);
-        function renderRecordsList(doc){
+      console.log(recordsList);
+      function renderRecordsList(doc) {
 
-         // if (  currentUserID !== doc.data().userID ) {
+        // if (  currentUserID !== doc.data().userID ) {
 
-            let tr = document.createElement('tr');
-            let td_wastePhoto = document.createElement('td');
-            let td_name = document.createElement('td');
-           let td_wasteContainer = document.createElement('td');
-            let td_img = document.createElement("img");
-            td_name.style="height:15px";
-            td_wasteContainer.style="height:15px";
-            td_wastePhoto.style="height:15px";
-            tr.style.width='10%';
-           td_img.style.height='100px';
-           td_img.style.width='100px';
+        let tr = document.createElement('tr');
+        let td_wastePhoto = document.createElement('td');
+        let td_name = document.createElement('td');
+        let td_wasteContainer = document.createElement('td');
+        let td_buttons = document.createElement('td');
+        let td_img = document.createElement("img");
+        let td_img2 = document.createElement("img");
+        let removal = document.createElement("button");
+        let edit = document.createElement("button");
 
 
-
-            tr.setAttribute('data-id', doc.id);
-            td_name.textContent = doc.data().name;
-           //td_wasteContainer.textContent = doc.data().wasteContainer;
-           td_wasteContainer.innerHTML += "<section> <span class= 'trash'> <span></span> <i></i></span> </section>";
-           td_img.src = doc.data().photoURL;
-           td_wastePhoto.appendChild(td_img);
-            
-
-           tr.appendChild(td_wastePhoto);
-            tr.appendChild(td_name);
-           tr.appendChild(td_wasteContainer);
-
-          
-            recordsBody.appendChild(tr);
-
-          }
-          
-        //}
-        
+        tr.style.width = '10%';
+        td_img.style.height = '100px';
+        td_img.style.width = '100px';
 
 
-          window.addEventListener("load", function(){
-            fillTable();
-        })
 
-        function getDatas(){
-          $('#myTable').DataTable();
-      
+        tr.setAttribute('data-id', doc.id);
+        td_name.textContent = doc.data().name;
+        td_wasteContainer.src = doc.data().binURL;
+        // td_wasteContainer.innerHTML += "<section> <span class= 'trash'> <span></span> <i></i></span> </section>";
+        td_img.src = doc.data().photoURL;
+        td_img2.src = doc.data().binURL;
+        td_wasteContainer.appendChild(td_img2);
+        td_wastePhoto.appendChild(td_img);
+        td_buttons.appendChild(removal);
+        // td_buttons.appendChild(edit);
+        // td_buttons.style.height="200px";
+
+
+        tr.appendChild(td_wastePhoto);
+        tr.appendChild(td_name);
+        tr.appendChild(td_wasteContainer);
+        //  tr.appendChild(td_buttons);
+
+
+        recordsBody.appendChild(tr);
+
+      }
+
+      //}
+
+
+
+      window.addEventListener("load", function () {
+        fillTable();
+      })
+
+      function getDatas() {
+        $('#myTable').DataTable();
+
+      }
+
+
+      auth.onAuthStateChanged(user => {
+        if (user.displayName !== null) {
+
+            usernameField.textContent = user.displayName;
+            emailField.textContent = user.email;
+
         }
-       
-    
-     
+        else {
+            var eemail = user.email;
+            var emailToUser = eemail.substr(0, eemail.indexOf('@'));
 
-        
 
-      
+            usernameField.textContent = emailToUser;
+            emailField.textContent = user.email;
+        }
+
+        var colours = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
+        if (user.displayName !== null) {
+            var name = user.displayName,
+                nameSplit = name.split(" "),
+                initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
+        }
+        else {
+            initials = makeid(2);
+        }
+
+        localStorage.setItem('selected', initials);
+
+
+        function makeid(length) {
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        var charIndex = initials.charCodeAt(0) - 65,
+            colourIndex = charIndex % 19;
+
+        var canvas = document.getElementById("user-icon");
+        var context = canvas.getContext("2d");
+
+        var canvasWidth = $(canvas).attr("width"),
+            canvasHeight = $(canvas).attr("height"),
+            canvasCssWidth = canvasWidth,
+            canvasCssHeight = canvasHeight;
+
+        if (window.devicePixelRatio) {
+            $(canvas).attr("width", canvasWidth * window.devicePixelRatio);
+            $(canvas).attr("height", canvasHeight * window.devicePixelRatio);
+            $(canvas).css("width", canvasCssWidth);
+            $(canvas).css("height", canvasCssHeight);
+            context.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
+
+        context.fillStyle = colours[colourIndex];
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.font = "128px Arial";
+        context.textAlign = "center";
+        context.fillStyle = "#FFF";
+        context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);
+
+
+    })
+
+
+
+
+
+
 
 
 
@@ -177,4 +294,5 @@ crossorigin="anonymous"></script>
 
 
 </body>
+
 </html>

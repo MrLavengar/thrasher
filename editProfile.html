@@ -29,18 +29,18 @@
 <body>
 
     <div class="topnav" id="myTopnav">
-		<a href="main.html" class="active">Home</a>
-		<a href="barcode-scanner.html">Scanner</a>
-		<a href="settings.html">Settings</a>
-		<a href="records.html">Records</a>
+        <a href="main.html" class="active">Home</a>
+        <a href="barcode-scanner.html">Scanner</a>
+        <a href="profileInfo.html">Settings</a>
+        <a href="records.html">Records</a>
         <a href="about.html">About</a>
         <a href="loggedOut.html" id='logout'>Logout</a>
-		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
-		  <i class="fa fa-bars"></i>
-		</a>
-      </div>
-      
-<script src="app.js"></script>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <script src="app.js"></script>
 
 
 
@@ -72,7 +72,8 @@
                     </div>
                     <div class="wizard">
                         <nav class="list-group list-group-flush">
-                            <a class="list-group-item" href="profileInfo.html" ><i class="fe-icon-user text-muted" ></i>User details </a>
+                            <a class="list-group-item" href="profileInfo.html"><i
+                                    class="fe-icon-user text-muted"></i>User details </a>
                             <a class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div><i class="fe-icon-tag mr-1 text-muted"></i>
@@ -149,135 +150,136 @@
         </div>
     </div>
 
+
+
+
+    <script>
+
+
+        const usernameField = document.getElementById('username');
+        const emailField = document.getElementById('email');
+        const passwordField = document.getElementById('password');
+        const phoneField = document.getElementById("phone");
+        const subBtn = document.getElementById("submit");
+        const resetBtn = document.getElementById("reset");
+
+
+
+        var user = firebase.auth().currentUser;
+        var uNameValue = usernameField.value;
+        var emailValue = emailField.value;
+        var phoneValue = phoneField.value;
+
+
+
+
+        auth.onAuthStateChanged(user => {
+            const updateProfile = () => {
+                user.updateProfile({
+                    displayName: uNameValue.value,
+                    email: emailValue.value,
+                    phoneNumber: phoneValue.value,
+                }).then(function () {
+                    console.log('done');
+                    usernameField.value = "";
+                    emailField.value = " ";
+                    phoneField.value = " ";
+
+                })
+
+            }
+        
+            let user2 = Promise.resolve(user);
+
+            const resetPassword = () => {
+                auth.sendPasswordResetEmail(user.email).then(function () {
+
+                }).then(() => {
+                    location.href = 'loggedOut.html';
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } 
         
 
 
-        <script>
+            resetBtn.addEventListener('click', resetPassword);
 
-
-
-
-            const usernameField = document.getElementById('username');
-            const emailField = document.getElementById('email');
-            const passwordField = document.getElementById('password');
-            const phoneField = document.getElementById("phone");
-            const subBtn = document.getElementById("submit");
-            const resetBtn = document.getElementById("reset");
-
-
-
-            var user = firebase.auth().currentUser;
-            var uNameValue = usernameField.value;
-            var emailValue = emailField.value;
-            var phoneValue = phoneField.value;
-
-
+            subBtn.addEventListener('click', updateProfile);
+        });
 
 
             auth.onAuthStateChanged(user => {
-                const updateProfile = () => {
-                    user.updateProfile({
-                        displayName: uNameValue.value,
-                        email: emailValue.value,
-                        phoneNumber: phoneValue.value,
-                    }).then(function () {
-                        console.log('done');
-                        usernameField.value = "";
-                        emailField.value = " ";
-                        phoneField.value = " ";
+                if (user.displayName !== null) {
 
-                    })
+                    usernameField.textContent = user.displayName;
+                    emailField.textContent = user.email;
 
                 }
-                let user2 = Promise.resolve(user);
+                else {
+                    var eemail = user.email;
+                    var emailToUser = eemail.substr(0, eemail.indexOf('@'));
 
-                const resetPassword = () => {
-                    auth.sendPasswordResetEmail(user.email).then(function () {
 
-                    }).then(() => {
-                        location.href = 'loggedOut.html';
-
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
+                    usernameField.textContent = emailToUser;
+                    emailField.textContent = user.email;
                 }
 
 
-                resetBtn.addEventListener('click', resetPassword);
-
-                subBtn.addEventListener('click', updateProfile);
 
 
-                auth.onAuthStateChanged(user => {
-                    if (user.displayName !== null) {
 
-                        usernameField.textContent = user.displayName;
-                        emailField.textContent = user.email;
+                var colours = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
+                if (user.displayName !== null) {
+                    var name = user.displayName,
+                        nameSplit = name.split(" "),
+                        initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
+                }
+                else {
+                    initials = makeid(2);
+                }
 
+                localStorage.setItem('selected', initials);
+
+
+                function makeid(length) {
+                    var result = '';
+                    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    var charactersLength = characters.length;
+                    for (var i = 0; i < length; i++) {
+                        result += characters.charAt(Math.floor(Math.random() * charactersLength));
                     }
-                    else {
-                        var eemail = user.email;
-                        var emailToUser = eemail.substr(0, eemail.indexOf('@'));
+                    return result;
+                }
+                var charIndex = initials.charCodeAt(0) - 65,
+                    colourIndex = charIndex % 19;
+
+                var canvas = document.getElementById("user-icon");
+                var context = canvas.getContext("2d");
+
+                var canvasWidth = $(canvas).attr("width"),
+                    canvasHeight = $(canvas).attr("height"),
+                    canvasCssWidth = canvasWidth,
+                    canvasCssHeight = canvasHeight;
+
+                if (window.devicePixelRatio) {
+                    $(canvas).attr("width", canvasWidth * window.devicePixelRatio);
+                    $(canvas).attr("height", canvasHeight * window.devicePixelRatio);
+                    $(canvas).css("width", canvasCssWidth);
+                    $(canvas).css("height", canvasCssHeight);
+                    context.scale(window.devicePixelRatio, window.devicePixelRatio);
+                }
+
+                context.fillStyle = colours[colourIndex];
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                context.font = "128px Arial";
+                context.textAlign = "center";
+                context.fillStyle = "#FFF";
+                context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);
 
 
-                        usernameField.textContent = emailToUser;
-                        emailField.textContent = user.email;
-                    }
+            })
+    </script>
 
-
-
-
-
-                    var colours = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
-                    if (user.displayName !== null) {
-                        var name = user.displayName,
-                            nameSplit = name.split(" "),
-                            initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
-                    }
-                    else {
-                        initials = makeid(2);
-                    }
-
-                    localStorage.setItem('selected', initials);
-
-
-                    function makeid(length) {
-                        var result = '';
-                        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                        var charactersLength = characters.length;
-                        for (var i = 0; i < length; i++) {
-                            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                        }
-                        return result;
-                    }
-                    var charIndex = initials.charCodeAt(0) - 65,
-                        colourIndex = charIndex % 19;
-
-                    var canvas = document.getElementById("user-icon");
-                    var context = canvas.getContext("2d");
-
-                    var canvasWidth = $(canvas).attr("width"),
-                        canvasHeight = $(canvas).attr("height"),
-                        canvasCssWidth = canvasWidth,
-                        canvasCssHeight = canvasHeight;
-
-                    if (window.devicePixelRatio) {
-                        $(canvas).attr("width", canvasWidth * window.devicePixelRatio);
-                        $(canvas).attr("height", canvasHeight * window.devicePixelRatio);
-                        $(canvas).css("width", canvasCssWidth);
-                        $(canvas).css("height", canvasCssHeight);
-                        context.scale(window.devicePixelRatio, window.devicePixelRatio);
-                    }
-
-                    context.fillStyle = colours[colourIndex];
-                    context.fillRect(0, 0, canvas.width, canvas.height);
-                    context.font = "128px Arial";
-                    context.textAlign = "center";
-                    context.fillStyle = "#FFF";
-                    context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);
-
-
-                })
-        </script>
-        </body>
 </html>
