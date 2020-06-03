@@ -18,27 +18,47 @@
 	<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./style/main.css">
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 </head>
 <body>
 
 	<div class="topnav" id="myTopnav">
 		<a href="main.html" class="active">Home</a>
 		<a href="barcode-scanner.html">Scanner</a>
-		<a href="settings.html">Settings</a>
+		<a href="profileInfo.html">Settings</a>
 		<a href="records.html">Records</a>
         <a href="about.html">About</a>
-        <a href="index.html">Logout</a>
+        <a href="loggedOut.html" id='logout'>Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
 	  </div>
 
-<h1>This is about page</h1>
 
 
 
-<script src="app.js">
+
+<script src="app.js"></script>
+
 	
-</script>
+	<div class='main' style='margin: 1em'>
+		<h1>What?</h1>
+		<p>The 'Thrasher' progressive web app</p>
+		<h1>Why?</h1>
+		<p>Because this application will help you take care of our planet. It will not only help you to idenitify to which container your trash should be trown in
+			but it will allow you to help other people and correct them if they are mistaken. The main goal of Trasher is to show everyone
+			how thrashed should be recycled by choosing correct waste container
+		</p>
+		<h1>How?</h1>
+		<p>It's simple. Just scan the barcode of a trash, and try to find it in our database. If it not exist, just add as a new trash to help other poeple recognize it in the future.</p>
+		</div>
+
 </body>
 </html>

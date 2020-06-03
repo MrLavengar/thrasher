@@ -1,11 +1,11 @@
 {
-    "name": "PWAConf",
-    "short_name": "PWAConf",
+    "name": "Thrasher",
+    "short_name": "Thrasher",
     "start_url": "index.html",
     "display": "standalone",
-    "background_color": "#2A3443",
-    "description": "A demo app for a fictional conference",
-    "theme_color": "#2A3443",
+    "background_color": "#00C84F",
+    "description": "An app to help the enviroment",
+    "theme_color": "#00C84F",
     "orientation": "portrait-primary",
     "icons": [
       {

@@ -25,9 +25,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./style/main.css">
 	<link rel="stylesheet" href="./style/userSettings.css">
+	
+	
 </head>
 
 <body>
+	<script src="app.js"></script>
 
 
 
@@ -50,11 +53,15 @@
 		<a href="settings.html">Settings</a>
 		<a href="records.html">Records</a>
 		<a href="about.html">About</a>
-		<a href="index.html">Logout</a>
+        <a href="loggedOut.html" id='logout'>Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
-			<i class="fa fa-bars"></i>
+		  <i class="fa fa-bars"></i>
 		</a>
-	</div>
+	  </div>
+
+	
+
+
 
 	<div class="container-fluid main" style="height:100vh;padding-left:0px;">
 
@@ -67,7 +74,8 @@
 		<div class="expand-menu nav flex-column">
 
 			<a href="settings.html" class="nav-link active mt-auto"><i class="far fa-user-circle"></i> Profile</a>
-			<a href="settings2.html" class="nav-link mb-auto"><i class="fas fa-cogs"></i> Edit Profile</a>
+			<a href="settings2.html" class="nav-link active mt-auto"><i class="fas fa-cogs"></i> Edit Profile</a>
+			<a href="myRecords.html" class="nav-link active mt-auto"><i class="fas fa-cogs"></i> Show my records</a>
 
 		</div>
 
@@ -79,7 +87,10 @@
 
 					<a href="settings.html" class="nav-link active mt-auto"><i class="far fa-user-circle"></i> Profile</a>
 
-					<a href="settings2.html" class="nav-link mb-auto"><i class="fas fa-cogs"></i> Edit Profile</a>
+					<a href="settings2.html" class="nav-link active mt-auto"><i class="fas fa-cogs"></i> Edit Profile</a>
+
+					<a href="myRecords" class="nav-link active mt-auto"><i class="fas fa-cogs"></i> Show my submissions!</a>
+
 
 				</div>
 
@@ -123,6 +134,7 @@
 										<label for=email>Email</label>
 										<p id='email'></p>
 									</div>
+									
 
 
 									<div class="row mt-5">
