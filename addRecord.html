@@ -155,8 +155,9 @@
           name: inputName.value,
           barCode: inputBarCode.value,
           wasteContainer: inputWasteContainer.value,
-          photoURL: URL
-      }).then(function() {
+          confirmation: 0,
+          photoURL: URL   
+      }).then(function() {      
           console.log("status saved!");
       }).catch(function (error){
           console.log("got an error: ", error);
@@ -177,7 +178,7 @@
             var imagesRef = storageRef.child(productsPhoto +'/' + timestamp + '.jpg');
             //var file = 
 
-        
+            
         
     
 </script>

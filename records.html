@@ -60,10 +60,20 @@
 
     <p id="output"> Write barcode (supposed to be provide from scanner) to look up for a record or click the button to show all records<br></p>
     <p id="imige"></p>
+    <p>
+    If this record is correct click appropriately
+    </p>
+    <button id="confirmButton" >Confirm</button>
+    <button id="denyButton">Deny</button>
+    <br>
+    <p>
+      Provide new barcode or use scanner
+      </p>
     <input  type="textfield" id="searchForMe" value="" /><br>
 
     <button id="searchButton">Search</button>
     <button id="loadAllButton" >Load All</button>
+
     <table class="table-dark" id="recordsTable" border="2" cellpadding="10" >
         <thead>
             <th scope="row">Name</th>
@@ -86,7 +96,19 @@
     function showTable(){
       document.getElementById("recordsTable").style.visibility= "visible";
     };
+    function hideConfirmationButtons(){
+      document.getElementById("confirmButton").style.visibility="hidden";
+      document.getElementById("denyButton").style.visibility="hidden";
+    }
+    
+
     hideTable();
+    hideConfirmationButtons();
+
+    function showConfirmationButtons(){
+      document.getElementById("confirmButton").style.visibility="visible";
+      document.getElementById("denyButton").style.visibility="visible";
+    }
 
     function resetTable() {
         var rowCount = recordsTable.rows.length;
@@ -110,9 +132,14 @@
           let imid = document.createElement("img");
           imid.src = doc.data().photoURL;
           imidz.appendChild(imid);
-          
+          var confirmedNumber = myData.confirmation;
+              console.log(myData.confirmation)
+          if (confirmedNumber <5 && confirmedNumber > -5){
+            showConfirmationButtons();
 
-          console.log(myData.barCode);
+          }
+
+          //console.log(myData.barCode);
           
           } else {
             localStorage.setItem("result", searchBarCode.value);
@@ -185,6 +212,54 @@
       console.log(result)})
 
 
+      
+  confirmButton.addEventListener("click", function(){      
+    const docRef = firestore.doc("products/" + searchBarCode.value);
+      docRef.get().then(function(doc) {
+      if (doc && doc.exists){
+        const myData = doc.data();
+        docRef.update({
+          confirmation: firebase.firestore.FieldValue.increment(1)
+          })
+          console.log(myData.confirmation)
+          if (myData.confirmation > 3 ){
+            hideConfirmationButtons();
+          } else{
+            console.log("printuje tutaj"+myData.confirmation)
+          }
+      }
+    });
+  })
+
+      denyButton.addEventListener("click", function(){
+        var checker;
+        const docRef = firestore.doc("products/" + searchBarCode.value);
+        docRef.get().then(function(doc) {
+          if (doc && doc.exists){
+          const myData = doc.data();
+          checker= myData.confirmation,
+          docRef.update({
+          confirmation: firebase.firestore.FieldValue.increment(-1),
+          })
+              console.log(myData.confirmation)
+          if (myData.confirmation < -3){
+            hideConfirmationButtons();
+          }
+          if(checker == -4 ){
+            console.log(checker+" to jest wartosc checkera")
+            docRef.delete().then(function() {
+              alert("This record is being deleted due to multiple denies")
+              console.log("Document successfully deleted!");
+              window.location.replace("records.html")
+            }).catch(function(error) {
+              console.error("Error removing document: ", error);
+            });
+          }
+      }
+    });
+    })
+
+    
 </script>
   
 
