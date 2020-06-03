@@ -54,6 +54,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>       
 
 
+    
+
+
 <h1 id="header">Adding Record</h1>
 
 <body>
@@ -73,12 +76,9 @@
     <br>
     <p>Choose waste container from the list:</p>
     <select id="wasteContainerHere">
-        <option value="yellow">yellow</option>
-        <option value="green">green</option>
-        <option value="blue">blue</option>
-        <option value="brown">brown</option>
-        <option value="black">black</option>
+        
       </select>
+      
 
 
       <div >
@@ -90,7 +90,14 @@
   
     <script>
     var firestore = firebase.firestore();
+    window.setTimeout(getDatas, 2000);//add this line for timer with ur function for load datas
+
+
+
     //var storage = firebase.storage();
+
+
+
     var storageRef = storage.ref();
     var productsPhoto = storageRef.child('productsPhoto');
 
@@ -99,7 +106,7 @@
     const inputBarCode = document.querySelector("#barCodeHere");
     const inputWasteContainer = document.querySelector("#wasteContainerHere");
     const addButton = document.querySelector("#addButton");
-
+    let binURL= "";
 
   
 
@@ -147,15 +154,48 @@
       
     });
 
+    function retrieveBins () {
+      console.log("startuje");
+  
+      firestore.collection('bins').get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+          addContainer(doc);
+        })
+    }).then(function() {
+        console.log("All record have been loaded");
+        }).catch(function (error){
+        console.log("got an error: ", error);
+     });
+    }
+  
+    function addContainer(doc){
+  
+      let option = document.createElement('option');
+      option.textContent = doc.data().color;
+      binURL = doc.data().binURL;
+      inputWasteContainer.appendChild(option);
+    }
+  
+
 
     addButton.addEventListener("click", function() {
       const docRef = firestore.doc("products/"+ localStorage.getItem('result'));
       console.log("I am going to save details to FIRESTORE");
+      let currentUser = firebase.auth().currentUser;
+      let currentUserID;
+      var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+      if ( currentUser != null) {
+        currentUserID = currentUser.uid;  
+      }
       docRef.set({
           name: inputName.value,
           barCode: inputBarCode.value,
           wasteContainer: inputWasteContainer.value,
-          photoURL: URL
+          photoURL: URL,
+          userID: currentUserID,
+          binURL: binURL,
+          author: currentUser.displayName,
+          addingDate: utc
       }).then(function() {
           console.log("status saved!");
       }).catch(function (error){
@@ -163,10 +203,17 @@
       });
   })      
 
+ 
+
+
+  
+
 
     window.addEventListener('load', function () {
       var result=localStorage.getItem('result')
-      document.getElementById('barCodeHere').value = result
+      document.getElementById('barCodeHere').value = result;
+     // retrieveBins();
+
       })
 
 
@@ -176,6 +223,13 @@
         var timestamp = new Date().getUTCMilliseconds();
             var imagesRef = storageRef.child(productsPhoto +'/' + timestamp + '.jpg');
             //var file = 
+
+            function getDatas() {
+
+              retrieveBins();
+              
+
+            }
 
         
         
