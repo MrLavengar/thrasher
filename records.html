@@ -23,7 +23,9 @@
 	<!--Custom styles-->
 	<!-- <link rel="stylesheet" type="text/css" href="style/filename.css"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/detail.css">
+
 </head>
 <body>
 
@@ -66,10 +68,9 @@
     <p>
     If this record is correct click appropriately
     </p>
-    <button id="confirmButton" style="visibility: hidden;">Confirm</button>
-    <button id="denyButton" style="visibility: hidden;">Deny</button>
+  
     <br>
-    <p>
+    <p id="provider">
       Provide new barcode or use scanner
       </p>
     <input  type="textfield" id="searchForMe" value="" /><br>
@@ -77,12 +78,49 @@
     <button id="searchButton">Search</button>
     <button id="loadAllButton" >Load All</button>
 
+
+
+    <div id='wrap' class="wrapper" style="visibility: hidden;">
+      <div class="product-img">
+        <img  id="wastePhoto" height="420" width="327">
+      </div>
+      <div class="product-info">
+        <div class="product-text">
+          Name: 
+          <h1 id='name'>Harves</h1>
+          Author:
+          <h2 id='author'>author</h2>
+          Container:
+          <img id="containerPhoto">
+          Added:
+          <p id="creationDate"> </p>
+        </div>
+        Rating:
+        <div id="lajki" class="product-price-btn">
+          <button id="confirmButton" >Confirm</button><br>
+          <button id="denyButton" >Deny</button>
+        </div>
+      </div>
+    </div>
+
   
   
     <script>
     var firestore = firebase.firestore();
     const searchBarCode = document.querySelector("#searchForMe");
     const detail = document.querySelector("#details");
+    const provider = document.querySelector("#provider");
+    const inputFiel = document.getElementById('searchForMe');
+    const loadAllBut = document.getElementById('loadAllButton');
+    const searchBtn = document.getElementById('searchButton');
+    const detailWastePhoto = document.querySelector("#wastePhoto");
+    const detailName = document.querySelector("#name");
+    const detailAuthor = document.querySelector("#author");
+    const detailCreationDate = document.querySelector("#creationDate");
+    const detailLikes = document.querySelector("#lajki");
+    const detailContainer = document.querySelector('#wrap');
+    const detailContainerPhoto = document.querySelector('#containerPhoto');
+    
 
 
    
@@ -107,13 +145,14 @@
     }
 
 
-    searchButton.addEventListener("click", function(){
+    searchBtn.addEventListener("click", function(){
      // let imidz = document.getElementById("imige");
       
       const docRef = firestore.doc("products/" + searchBarCode.value);
         docRef.get().then(function(doc) {
         if (doc && doc.exists){
           const myData = doc.data();
+          hideElements();
           showDetail(doc);
           //output.innerText = myData.name + "\n Bar code: " + myData.barCode + "\n  Waste container: " +
          // myData.wasteContainer;
@@ -143,27 +182,34 @@
 
     function showDetail(doc){
       const myData = doc.data();
-      var showName = document.createElement("p");
-      showName.innerHTML= myData.name;
+     // var showName = document.createElement("p");
+      detailName.innerHTML= myData.name;
 
-      var showAuthor = document.createElement("p");
-      showAuthor.innerHTML = myData.author;
+     // var showAuthor = document.createElement("p");
+      detailAuthor.innerHTML = myData.author;
 
-      var showAddingDate = document.createElement("p");
-      showAddingDate.innerHTML = myData.addingDate;
+     // var showAddingDate = document.createElement("p");
+      detailCreationDate.innerHTML = myData.addingDate;
       
-      var showWastePhoto = document.createElement("img");
-      showWastePhoto.src = myData.photoURL
+     // var showWastePhoto = document.createElement("img");
+      detailWastePhoto.src = myData.photoURL
+      detailContainerPhoto.src = assignContainerPhoto(doc);
+      detailContainer.style.visibility = 'visible';
+      showConfirmationButtons();
 
-      var showContainer = document.createElement("img");
-      showContainer.src = assignContainerPhoto(doc);
 
+     // var showContainer = document.createElement("img");
+      //showContainer.src = assignContainerPhoto(doc);
+
+      /*
       detail.appendChild(showName);
       detail.appendChild(showAuthor);
       detail.appendChild(showAddingDate);
       detail.appendChild(showWastePhoto);
       detail.appendChild(showContainer);
       showConfirmationButtons();
+      */
+
 
     }
 
@@ -190,8 +236,11 @@
       return binURL;
     }
     function hideElements(){
-      hideConfirmationButtons
-
+      provider.style.visibility='hidden';
+      searchBtn.style.visibility='hidden';
+      loadAllBut.style.visibility='hidden';
+      searchBarCode.style.visibility='hidden';
+    
     }
     
     loadAllButton.addEventListener("click", function() {
@@ -238,9 +287,7 @@
               
                 recordsList.appendChild(tr);
 
-                let inputFiel = document.getElementById('searchForMe');
-                let loadAllBut = document.getElementById('loadAllButton');
-                let searchBtn = document.getElementById('searchButton');
+                
                 inputFiel.style.visibility = "hidden";
                 loadAllBut.style.visibility = "hidden";
                 searchBtn.style.visibility = "hidden";
