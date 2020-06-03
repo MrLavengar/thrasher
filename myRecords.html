@@ -33,8 +33,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
 <link rel="stylesheet" href="./style/main.css">
-<link rel="stylesheet" href="./style/popUp.css">
-<!--<link rel="stylesheet" href="./style/container.css"> -->
+<link rel="stylesheet" href="./style/container.css">
 <link rel="stylesheet" type="text/css" href="./style/profile.css">
 
 
@@ -134,19 +133,6 @@
       window.setTimeout(getDatas, 2000);//add this line for timer with ur function for load datas
 
 
-     /* $(window).load(function () {
-        
-        $(".trigger_popup_fricc").click(function(){
-           $('.hover_bkgr_fricc').show();
-        });
-        $('.hover_bkgr_fricc').click(function(){
-            $('.hover_bkgr_fricc').hide();
-        });
-        $('.popupCloseButton').click(function(){
-            $('.hover_bkgr_fricc').hide();
-        });
-    });
-*/
       function fillTable() {
         console.log("startuje");
 
@@ -187,42 +173,25 @@
 
 
         tr.style.width = '10%';
-        td_img.style.height = '80px';
-        td_img.style.width = '80px';
+        td_img.style.height = '100px';
+        td_img.style.width = '100px';
 
 
 
         tr.setAttribute('data-id', doc.id);
         td_name.textContent = doc.data().name;
         td_wasteContainer.src = doc.data().binURL;
+        // td_wasteContainer.innerHTML += "<section> <span class= 'trash'> <span></span> <i></i></span> </section>";
         td_img.src = doc.data().photoURL;
         td_img2.src = doc.data().binURL;
         td_wasteContainer.appendChild(td_img2);
         td_wastePhoto.appendChild(td_img);
         td_buttons.appendChild(removal);
-        let showDetails = document.createElement("a");
-        showDetails.setAttribute("class", "trigger_popup_fricc");
-        showDetails.appendChild(td_wastePhoto);
+        // td_buttons.appendChild(edit);
+        // td_buttons.style.height="200px";
 
 
-        let div1 = document.createElement("div");
-        div1.setAttribute("class", "hover_bkgr_fricc");
-        let span1 = document.createElement("span");
-        span1.setAttribute("class", "helper");
-        let div2 = document.createElement("div");
-        let div3 = document.createElement("div");
-        div3.setAttribute("class", "popupCloseButton");
-        let p1 = document.createElement("p");
-        p1.innerText="Add any HTML content";
-        
-        div2.appendChild(div3);
-        div2.appendChild(p1);
-        
-        div1.appendChild(span1);
-        div1.appendChild(div2);
-
-
-        tr.appendChild(showDetails);
+        tr.appendChild(td_wastePhoto);
         tr.appendChild(td_name);
         tr.appendChild(td_wasteContainer);
         //  tr.appendChild(td_buttons);
@@ -232,15 +201,12 @@
 
       }
 
-     
-
       //}
 
 
 
       window.addEventListener("load", function () {
         fillTable();
-
       })
 
       function getDatas() {
