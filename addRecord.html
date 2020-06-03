@@ -223,7 +223,8 @@
           userID: currentUserID,
           binURL: assignContainerPhoto(),
           author: currentUser.displayName,
-          addingDate: utc
+          addingDate: utc,
+          confirmation: 0
       }).then(function() {
           console.log("status saved!");
       }).catch(function (error){
