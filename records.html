@@ -6,6 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+</head>
+<script>
+</script>
   <title>Records</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -64,6 +73,7 @@
 
     <button id="searchButton">Search</button>
     <button id="loadAllButton" >Load All</button>
+   <!--
     <table class="table-dark" id="recordsTable" border="2" cellpadding="10" >
         <thead>
             <th scope="row">Name</th>
@@ -73,32 +83,20 @@
            <th scope="row">Image</th>
         </thead>
     </table>
-  
+  --> 
+
     <script>
     var firestore = firebase.firestore();
+    getDatas();
+   // window.setTimeout(getDatas, 2000);//add this line for timer with ur function for load datas
+
     const searchBarCode = document.querySelector("#searchForMe");
 
-    var cleanTable = document.getElementById("recordsTable").innerHTML;
 
-    function hideTable(){
-      document.getElementById("recordsTable").style.visibility= "hidden";
-    };
 
-    function showTable(){
-      document.getElementById("recordsTable").style.visibility= "visible";
-    };
-    hideTable();
-
-    function resetTable() {
-        var rowCount = recordsTable.rows.length;
-        for (var i = rowCount - 1; i > 0; i--) {
-          recordsTable.deleteRow(i);
-        }
-    }
 
 
     searchButton.addEventListener("click", function(){
-      hideTable();
       let imidz = document.getElementById("imige");
       
       const docRef = firestore.doc("products/" + searchBarCode.value);
@@ -127,66 +125,22 @@
     })
     
     loadAllButton.addEventListener("click", function() {
-      console.log("startuje");
-      resetTable();
-      showTable();
-      firestore.collection('products').get().then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                  renderRecordsList(doc);
-                })
-            }).then(function() {
-                console.log("All record have been loaded");
-                }).catch(function (error){
-                console.log("got an error: ", error);
-             });
-
-             output.innerText="";
-             
-
-            const recordsList = document.querySelector('#recordsTable') ;
-            function renderRecordsList(doc){
-                let tr = document.createElement('tr');
-                let td_name = document.createElement('td');
-                let td_barCode = document.createElement('td');
-                let td_wasteContainer = document.createElement('td');
-                let td_wastePhoto = document.createElement('td');
-                let td_img = document.createElement("img");
-                td_img.style.height='250px';
-                td_img.style.width='200px';
-
-
-
-                tr.setAttribute('data-id', doc.id);
-                td_name.textContent = doc.data().name;
-                td_barCode.textContent = doc.data().barCode;
-                td_wasteContainer.textContent = doc.data().wasteContainer;
-                td_img.src = doc.data().photoURL;
-                td_wastePhoto.appendChild(td_img);
-                
-
-
-                tr.appendChild(td_name);
-                tr.appendChild(td_barCode);
-                tr.appendChild(td_wasteContainer);
-                tr.appendChild(td_wastePhoto);
-
-              
-                recordsList.appendChild(tr);
-
-                let inputFiel = document.getElementById('searchForMe');
-                let loadAllBut = document.getElementById('loadAllButton');
-                let searchBtn = document.getElementById('searchButton');
-                inputFiel.style.visibility = "hidden";
-                loadAllBut.style.visibility = "hidden";
-                searchBtn.style.visibility = "hidden";
-
-            }
+      window.location.href = 'allRecords.html';
+     
       });
 
     window.addEventListener('load', function () {
       var result=localStorage.getItem('result')
       document.getElementById('searchForMe').value = result
-      console.log(result)})
+      console.log(result)
+      
+    })
+
+      function getDatas() {
+        $('#recordsTable').DataTable();
+
+      }
+
 
 
 </script>
