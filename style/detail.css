@@ -137,7 +137,10 @@
     background-color: #79b0a1;
   }
 
+  .row {
+    height: 45px;
+  }
 
-  #name {
-    font-size: small;
+  .row120 {
+    height: 150px;
   }

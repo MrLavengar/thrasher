@@ -136,8 +136,7 @@
       console.log(recordsList);
       function renderRecordsList(doc) {
 
-        // if (  currentUserID !== doc.data().userID ) {
-
+        // if (  currentUserID !== doc.data().userID ) {        
         let tr = document.createElement('tr');
         let td_wastePhoto = document.createElement('td');
         let td_name = document.createElement('td');
@@ -166,12 +165,13 @@
         td_buttons.appendChild(removal);
         // td_buttons.appendChild(edit);
         // td_buttons.style.height="200px";
+        td_wastePhoto.className = "clickablePhoto";
 
 
         tr.appendChild(td_wastePhoto);
         tr.appendChild(td_name);
         tr.appendChild(td_wasteContainer);
-        //  tr.appendChild(td_buttons);
+        //tr.appendChild(td_buttons);
 
 
         recordsBody.appendChild(tr);
@@ -192,72 +192,13 @@
       }
 
 
-      auth.onAuthStateChanged(user => {
-        if (user.displayName !== null) {
+     
 
-            usernameField.textContent = user.displayName;
-            emailField.textContent = user.email;
-
-        }
-        else {
-            var eemail = user.email;
-            var emailToUser = eemail.substr(0, eemail.indexOf('@'));
-
-
-            usernameField.textContent = emailToUser;
-            emailField.textContent = user.email;
-        }
-
-        var colours = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
-        if (user.displayName !== null) {
-            var name = user.displayName,
-                nameSplit = name.split(" "),
-                initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
-        }
-        else {
-            initials = makeid(2);
-        }
-
-        localStorage.setItem('selected', initials);
-
-
-        function makeid(length) {
-            var result = '';
-            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            var charactersLength = characters.length;
-            for (var i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-        }
-        var charIndex = initials.charCodeAt(0) - 65,
-            colourIndex = charIndex % 19;
-
-        var canvas = document.getElementById("user-icon");
-        var context = canvas.getContext("2d");
-
-        var canvasWidth = $(canvas).attr("width"),
-            canvasHeight = $(canvas).attr("height"),
-            canvasCssWidth = canvasWidth,
-            canvasCssHeight = canvasHeight;
-
-        if (window.devicePixelRatio) {
-            $(canvas).attr("width", canvasWidth * window.devicePixelRatio);
-            $(canvas).attr("height", canvasHeight * window.devicePixelRatio);
-            $(canvas).css("width", canvasCssWidth);
-            $(canvas).css("height", canvasCssHeight);
-            context.scale(window.devicePixelRatio, window.devicePixelRatio);
-        }
-
-        context.fillStyle = colours[colourIndex];
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.font = "128px Arial";
-        context.textAlign = "center";
-        context.fillStyle = "#FFF";
-        context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);
-
-
-    })
+    jQuery(document).ready(function($) {
+      $(".clickablePhoto").click(function() {
+          window.location = $(this).data("rated.html");
+      });
+  })
 
 
 
