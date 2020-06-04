@@ -15,6 +15,16 @@
 
 
 <!--Custom styles-->
+
+
+
+
+<!--Bootsrap 4 CDN-->
+
+
+
+
+<!--Custom styles-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
@@ -50,6 +60,8 @@
   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="./style/detail.css">
+<link rel="stylesheet" href="./style/detail.css">
 </head>
 
 
@@ -78,6 +90,9 @@
 <h3 style="text-align: center;">
     All Records
 </h3>
+<input type="textfield" id="searchForMe" style="display: none;" value="" /><br>
+
+
 
 
         <div class="container">
@@ -98,16 +113,76 @@
       </div>
     </div>
 
+    <div id='wrap' class="wrapper" style="visibility: hidden;">
+      <div class="product-img">
+        <img id="wastePhoto" height="420" width="327">
+      </div>
+      <div class="product-info">
+        <div class="product-text">
+          <div class="row">
+            <div class="col-sm-2">Name:</div>
+            <div class="col-sm-10">
+              <p id='name'>
+                </h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Author:</div>
+            <div class="col-sm-10">
+              <p id='author'>
+                </h1>
+            </div>
+          </div>
+          <div class="row120">
+            <div class="col-sm-2">Container:</div>
+            <div class="col-sm-10"><img id="containerPhoto"></h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Added:</div>
+            <div class="col-sm-10">
+              <p id='creationDate'>
+                </h2>
+                </h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Rating:</div>
+            <div class="col-sm-10">
+              <p id="lajki"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6"><button id="confirmButton" class="btn btn-outline-success">Confirm</button></div>
+            <div class="col-sm-6"><button id="denyButton" class="btn btn-outline-danger">Deny</button> </div>
+          </div>
+        </div>
+      </div>
+
+
+
 
 
     <script>
+      const wrapper = document.querySelector("#wrapper");
+      const detailWastePhoto = document.querySelector("#wastePhoto");
+      const detailName = document.querySelector("#name");
+      const detailAuthor = document.querySelector("#author");
+      const detailCreationDate = document.querySelector("#creationDate");
+      const detailLikes = document.querySelector("#lajki");
+      const detailContainer = document.querySelector('#wrap');
+      const detailContainerPhoto = document.querySelector('#containerPhoto');
+      const searchBarCode = document.querySelector("#searchForMe");
+      let barCode = "";
 
 
 
 
 
       var firestore = firebase.firestore();
-      window.setTimeout(getDatas, 2000);//add this line for timer with ur function for load datas
+      window.setTimeout(getDatas, 2000);
+      const recordsTable = document.querySelector(".container");
+
 
 
       function fillTable() {
@@ -146,7 +221,8 @@
         let td_img2 = document.createElement("img");
         let removal = document.createElement("button");
         let edit = document.createElement("button");
-
+        let clickable = document.createElement("a");
+        
 
         tr.style.width = '10%';
         td_img.style.height = '100px';
@@ -160,12 +236,28 @@
         // td_wasteContainer.innerHTML += "<section> <span class= 'trash'> <span></span> <i></i></span> </section>";
         td_img.src = doc.data().photoURL;
         td_img2.src = doc.data().binURL;
+        clickable.appendChild(td_img);
         td_wasteContainer.appendChild(td_img2);
-        td_wastePhoto.appendChild(td_img);
+        td_wastePhoto.appendChild(clickable);
         td_buttons.appendChild(removal);
+        clickable.appendChild(td_img);
+        barCode = doc.data().barCode;
+
         // td_buttons.appendChild(edit);
         // td_buttons.style.height="200px";git
-        td_wastePhoto.className = "clickablePhoto";
+       // td_wastePhoto.className = "clickablePhoto";
+
+       clickable.addEventListener("click", function(){
+         recordsTable.style.display="none"
+         //wrapper.parentNode.removeChild(wrapper);
+         //document.getElementById("wrap").outerHTML = "";
+
+         showDetail(doc);
+
+
+       })
+
+       
 
 
         tr.appendChild(td_wastePhoto);
@@ -184,28 +276,115 @@
 
       window.addEventListener("load", function () {
         fillTable();
+        var result = localStorage.getItem('result')
+        document.getElementById('searchForMe').value = result
+        console.log(result)
       })
 
       function getDatas() {
         $('#myTable').DataTable();
 
       }
+      function showDetail(doc) {
+        const myData = doc.data();
+        // var showName = document.createElement("p");
+        detailName.innerHTML = myData.name;
+
+        // var showAuthor = document.createElement("p");
+        detailAuthor.innerHTML = myData.author;
+
+        // var showAddingDate = document.createElement("p");
+        detailCreationDate.innerHTML = myData.addingDate;
+
+        // var showWastePhoto = document.createElement("img");
+        detailWastePhoto.src = myData.photoURL;
+        detailContainerPhoto.src = assignContainerPhoto(doc);
+        detailContainer.style.visibility = 'visible';
+
+        detailLikes.innerHTML = myData.confirmation;
 
 
-     
+        var showContainer = document.createElement("img");
+        showContainer.src = assignContainerPhoto(doc);
 
-    jQuery(document).ready(function($) {
-      $(".clickablePhoto").click(function() {
-          window.location = $(this).data("rated.html");
+        
+
+      }
+
+
+      function assignContainerPhoto(doc) {
+        var myData = doc.data();
+
+        if (myData.wasteContainer == "green") {
+          binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fgreen.png?alt=media&token=fed5248e-34dc-46b5-9dc8-9a404b4949f5";
+        }
+        else if (myData.wasteContainer == "blue") {
+          binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fblue.png?alt=media&token=a3f9dc88-e69d-4c55-8a45-203a8f77139b";
+        }
+        else if (myData.wasteContainer == "black") {
+          binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fblack.png?alt=media&token=0839165d-f42b-4b7d-a79f-642bba9533ca";
+        }
+        else if (myData.wasteContainer == "yellow") {
+          binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fyellow.png?alt=media&token=516dce0c-67d3-4a30-8b35-42eb4b0dde83"
+        }
+        else if (myData.wasteContainer == "red") {
+          binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fred.png?alt=media&token=b8e8d83f-1ea5-40d7-8c12-736a481cf3ab";
+        }
+        return binURL;
+      }
+
+      confirmButton.addEventListener("click", function () {
+        const docRef = firestore.doc("products/" + searchBarCode.value);
+        docRef.get().then(function (doc) {
+          if (doc && doc.exists) {
+            const myData = doc.data();
+            docRef.update({
+              confirmation: firebase.firestore.FieldValue.increment(1),
+            })
+            window.location.href = "rated.html";
+
+            console.log(myData.confirmation)
+            if (myData.confirmation > 3) {
+              hideConfirmationButtons();
+            } else {
+              console.log("printuje tutaj" + myData.confirmation)
+            }
+          }
+        })
       });
-  })
 
+      denyButton.addEventListener("click", function () {
+        var checker;
+        const docRef = firestore.doc("products/" + searchBarCode.value);
+        docRef.get().then(function (doc) {
+          if (doc && doc.exists) {
+            const myData = doc.data();
+            checker = myData.confirmation,
+              docRef.update({
+                confirmation: firebase.firestore.FieldValue.increment(-1),
+              })
 
+            window.location.href = "rated.html";
 
+            console.log(myData.confirmation)
+            if (myData.confirmation < -3) {
+              hideConfirmationButtons();
+            }
+            if (checker == -4) {
+              console.log(checker + " to jest wartosc checkera")
+              docRef.delete().then(function () {
+                alert("This record is being deleted due to multiple denies")
+                console.log("Document successfully deleted!");
+                window.location.replace("records.html")
+              }).catch(function (error) {
+                console.error("Error removing document: ", error);
+              });
+            }
+          }
+        });
+      })
 
-
-
-
+  
 
 
     </script>
