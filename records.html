@@ -86,27 +86,57 @@
       </div>
       <div class="product-info">
         <div class="product-text">
-          Name: 
-          <h1 id='name'>Harves</h1>
-          Author:
-          <h2 id='author'>author</h2>
-          Container:
-          <img id="containerPhoto">
-          Added:
-          <p id="creationDate"> </p>
+          <div class="row">
+            <div class="col-sm-2">Name:</div>
+            <div class="col-sm-10"><p id='name'></h1></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Author:</div>
+            <div class="col-sm-10"><p id='author'></h1></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Container:</div>
+            <div class="col-sm-10"><img id="containerPhoto"></h1></div>
+          </div>
+          <div class="row">
+          <div class="col-sm-2">Added:</div>
+          <div class="col-sm-10"><p id='creationDate'></h2></h1></div>
         </div>
-        Rating:
+        <div class="row">
+          <div class="col-sm-2">Rating:</div>
+          <div class="col-sm-10"><div id="lajki"></div></h2></h1></div>
+        </div>
+
         <div id="lajki" class="product-price-btn">
           <button id="confirmButton" >Confirm</button><br>
           <button id="denyButton" >Deny</button>
         </div>
       </div>
+      </div>
     </div>
+
+    <div class="container" style="visibility: hidden;">
+      <table class="table table-fluid" id="recordsTable">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Container</th>
+          </tr>
+        </thead>
+        <tbody id="recordsBody">
+
+        </tbody>
+      </table>
+    </div>
+
+
 
   
   
     <script>
     var firestore = firebase.firestore();
+
     const searchBarCode = document.querySelector("#searchForMe");
     const detail = document.querySelector("#details");
     const provider = document.querySelector("#provider");
@@ -120,6 +150,7 @@
     const detailLikes = document.querySelector("#lajki");
     const detailContainer = document.querySelector('#wrap');
     const detailContainerPhoto = document.querySelector('#containerPhoto');
+    const recordsBody = document.querySelector("#recordsBody");
     
 
 
@@ -137,12 +168,7 @@
       document.getElementById("denyButton").style.visibility="visible";
     }
 
-    function resetTable() {
-        var rowCount = recordsTable.rows.length;
-        for (var i = rowCount - 1; i > 0; i--) {
-          recordsTable.deleteRow(i);
-        }
-    }
+
 
 
     searchBtn.addEventListener("click", function(){
@@ -198,17 +224,10 @@
       showConfirmationButtons();
 
 
-     // var showContainer = document.createElement("img");
-      //showContainer.src = assignContainerPhoto(doc);
+     var showContainer = document.createElement("img");
+      showContainer.src = assignContainerPhoto(doc);
 
-      /*
-      detail.appendChild(showName);
-      detail.appendChild(showAuthor);
-      detail.appendChild(showAddingDate);
-      detail.appendChild(showWastePhoto);
-      detail.appendChild(showContainer);
-      showConfirmationButtons();
-      */
+  
 
 
     }
@@ -244,55 +263,7 @@
     }
     
     loadAllButton.addEventListener("click", function() {
-      console.log("startuje");
-      resetTable();
-      showTable();
-      firestore.collection('products').get().then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                  renderRecordsList(doc);
-                })
-            }).then(function() {
-                console.log("All record have been loaded");
-                }).catch(function (error){
-                console.log("got an error: ", error);
-             });
-
-             output.innerText="";
-             
-
-            const recordsList = document.querySelector('#recordsTable') ;
-            function renderRecordsList(doc){
-                let tr = document.createElement('tr');
-                let td_name = document.createElement('td');
-                let td_barCode = document.createElement('td');
-                let td_wasteContainer = document.createElement('td');
-                let td_wastePhoto = document.createElement('td');
-                let td_img = document.createElement("img");
-
-
-
-                tr.setAttribute('data-id', doc.id);
-                td_name.textContent = doc.data().name;
-                td_barCode.textContent = doc.data().barCode;
-                td_wasteContainer.textContent = doc.data().wasteContainer;
-               td_img.src = doc.data().photoURL;
-                td_wastePhoto.appendChild(td_img);
-
-
-                tr.appendChild(td_name);
-                tr.appendChild(td_barCode);
-                tr.appendChild(td_wasteContainer);
-               // tr.appendChild(td_wastePhoto);
-
-              
-                recordsList.appendChild(tr);
-
-                
-                inputFiel.style.visibility = "hidden";
-                loadAllBut.style.visibility = "hidden";
-                searchBtn.style.visibility = "hidden";
-
-            }
+      window.location.href="allRecords.html";
       });
 
     window.addEventListener('load', function () {
@@ -348,6 +319,7 @@
     });
     })
 
+   
     
 </script>
   

@@ -23,10 +23,12 @@
     float: left;
     height: 420px;
     width: 327px;
+
   }
   
   .product-img img {
     border-radius: 7px 0 0 7px;
+
   }
   
   .product-info {
@@ -36,11 +38,13 @@
     border-radius: 0 7px 10px 7px;
     background-color: #ffffff;
     font-size: smaller;
+
   }
   
   .product-text {
     height: 300px;
     width: 327px;
+
     
   }
   
@@ -49,11 +53,13 @@
     padding-top: 52px;
     font-size: 34px;
     color: #474747;
+
   }
   
   .product-text h1,
   .product-price-btn p {
     font-family: 'Bentham', serif;
+
   }
   
   .product-text h2 {
@@ -64,6 +70,7 @@
     text-transform: uppercase;
     color: #d2d2d2;
     letter-spacing: 0.2em;
+
   }
   
   .product-text p {
@@ -75,6 +82,7 @@
     font-size: 15px;
     font-weight: lighter;
     overflow: hidden;
+
   }
   
   .product-price-btn {
@@ -94,6 +102,8 @@
     font-size: 28px;
     font-weight: lighter;
     color: #474747;
+    position: absolute;
+
   }
   
   span {
@@ -125,4 +135,9 @@
   
   .product-price-btn button:hover {
     background-color: #79b0a1;
+  }
+
+
+  #name {
+    font-size: small;
   }
