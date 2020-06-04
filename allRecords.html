@@ -15,6 +15,16 @@
 
 
 <!--Custom styles-->
+
+
+
+
+<!--Bootsrap 4 CDN-->
+
+
+
+
+<!--Custom styles-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
@@ -50,6 +60,8 @@
   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="./style/detail.css">
+<link rel="stylesheet" href="./style/detail.css">
 </head>
 
 
@@ -75,36 +87,15 @@
 		</a>
 	  </div>
 
+<h3 style="text-align: center;">
+    All Records
+</h3>
+<input type="textfield" id="searchForMe" style="display: none;" value="" /><br>
 
 
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-4 pb-5">
-        <!-- Account Sidebar-->
-        <div class="author-card pb-3">
-          
-          <div class="wizard">
-            <nav class="list-group list-group-flush">
-              <a class="list-group-item" href="profileInfo.html"><i class="fe-icon-user text-muted"></i>User details </a>
-              <a class="list-group-item" href="editProfile.html">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div><i class="fe-icon-tag mr-1 text-muted"></i>
-                    <div class="d-inline-block font-weight-medium text-uppercase">Edit Profile</div>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item" href="myRecords.html">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div><i class="fe-icon-tag mr-1 text-muted"></i>
-                    <div class="d-inline-block font-weight-medium text-uppercase">My records</div>
-                  </div>
-                </div>
-              </a>
-            </nav>
-          </div>
-        </div>
 
-        <div class="containero">
+
+        <div class="container">
           <table class="table table-fluid" id="myTable">
             <thead>
               <tr>
@@ -169,17 +160,10 @@
       </div>
 
 
-    
-    <!-- Link to open the modal -->
+
+
 
     <script>
-
-
-
-
-
-      var firestore = firebase.firestore();
-      window.setTimeout(getDatas, 2000);//add this line for timer with ur function for load datas
       const wrapper = document.querySelector("#wrapper");
       const detailWastePhoto = document.querySelector("#wastePhoto");
       const detailName = document.querySelector("#name");
@@ -189,7 +173,16 @@
       const detailContainer = document.querySelector('#wrap');
       const detailContainerPhoto = document.querySelector('#containerPhoto');
       const searchBarCode = document.querySelector("#searchForMe");
-      const recordsTable = document.querySelector(".containero");
+      let barCode = "";
+
+
+
+
+
+      var firestore = firebase.firestore();
+      window.setTimeout(getDatas, 2000);
+      const recordsTable = document.querySelector(".container");
+
 
 
       function fillTable() {
@@ -211,16 +204,14 @@
 
       const recordsList = document.querySelector('#myTable');
       const recordsBody = document.querySelector('#recordsBody');
-      
+      let currentUser = firebase.auth().currentUser;
+      if (currentUser != null) {
+        currentUserID = currentUser.uid;
+      }
       console.log(recordsList);
       function renderRecordsList(doc) {
-        let currentUser = firebase.auth().currentUser;
-      
 
-        if(currentUser.displayName != doc.data().author){
-        } else{
-        // if (  currentUserID !== doc.data().userID ) {
-
+        // if (  currentUserID !== doc.data().userID ) {        
         let tr = document.createElement('tr');
         let td_wastePhoto = document.createElement('td');
         let td_name = document.createElement('td');
@@ -231,7 +222,7 @@
         let removal = document.createElement("button");
         let edit = document.createElement("button");
         let clickable = document.createElement("a");
-
+        
 
         tr.style.width = '10%';
         td_img.style.height = '100px';
@@ -245,37 +236,39 @@
         // td_wasteContainer.innerHTML += "<section> <span class= 'trash'> <span></span> <i></i></span> </section>";
         td_img.src = doc.data().photoURL;
         td_img2.src = doc.data().binURL;
+        clickable.appendChild(td_img);
         td_wasteContainer.appendChild(td_img2);
         td_wastePhoto.appendChild(clickable);
         td_buttons.appendChild(removal);
         clickable.appendChild(td_img);
-
-        
-       clickable.addEventListener("click", function(){
-        recordsTable.style.display=""
-        //wrapper.parentNode.removeChild(wrapper);
-        //document.getElementById("wrap").outerHTML = "";
-
-        showDetail(doc);
-       
-
-
-      })
+        barCode = doc.data().barCode;
 
         // td_buttons.appendChild(edit);
-        // td_buttons.style.height="200px";
+        // td_buttons.style.height="200px";git
+       // td_wastePhoto.className = "clickablePhoto";
+
+       clickable.addEventListener("click", function(){
+         recordsTable.style.display="none"
+         //wrapper.parentNode.removeChild(wrapper);
+         //document.getElementById("wrap").outerHTML = "";
+
+         showDetail(doc);
+
+
+       })
+
+       
 
 
         tr.appendChild(td_wastePhoto);
         tr.appendChild(td_name);
         tr.appendChild(td_wasteContainer);
-        //  tr.appendChild(td_buttons);
+        //tr.appendChild(td_buttons);
 
 
         recordsBody.appendChild(tr);
 
       }
-    }
 
       //}
 
@@ -283,13 +276,15 @@
 
       window.addEventListener("load", function () {
         fillTable();
+        var result = localStorage.getItem('result')
+        document.getElementById('searchForMe').value = result
+        console.log(result)
       })
 
       function getDatas() {
         $('#myTable').DataTable();
 
       }
-
       function showDetail(doc) {
         const myData = doc.data();
         // var showName = document.createElement("p");
@@ -305,14 +300,12 @@
         detailWastePhoto.src = myData.photoURL;
         detailContainerPhoto.src = assignContainerPhoto(doc);
         detailContainer.style.visibility = 'visible';
-        recordsTable.style.display="none";
 
         detailLikes.innerHTML = myData.confirmation;
 
 
         var showContainer = document.createElement("img");
         showContainer.src = assignContainerPhoto(doc);
-
 
         
 
@@ -339,7 +332,7 @@
         }
         return binURL;
       }
-      
+
       confirmButton.addEventListener("click", function () {
         const docRef = firestore.doc("products/" + searchBarCode.value);
         docRef.get().then(function (doc) {
@@ -391,9 +384,9 @@
         });
       })
 
+  
 
 
-      
     </script>
 
 

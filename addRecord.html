@@ -23,13 +23,13 @@
 </head>
 <body>
 
-	<div class="topnav" id="myTopnav">
+  <div class="topnav" id="myTopnav">
 		<a href="main.html" class="active">Home</a>
 		<a href="barcode-scanner.html">Scanner</a>
-		<a href="settings.html">Settings</a>
+		<a href="profileInfo.html">Settings</a>
 		<a href="records.html">Records</a>
-    <a href="about.html">About</a>
-    <a href="loggedOut.html" id='logout'>Logout</a>
+        <a href="about.html">About</a>
+        <a href="loggedOut.html" id='logout'>Logout</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
@@ -74,6 +74,10 @@
     <input type="textfield" id="nameTextHere" value="" />
     <br>
     <br>
+
+    <div id="images">
+
+    </div>
     <p>Choose waste container from the list:</p>
     <select id="wasteContainerHere">
         
@@ -171,10 +175,34 @@
     function addContainer(doc){
   
       let option = document.createElement('option');
+     // let containerImage = document.createElement('img');
+      //containerImage.src = doc.data().binURL;
       option.textContent = doc.data().color;
       binURL = doc.data().binURL;
       inputWasteContainer.appendChild(option);
     }
+
+    function assignContainerPhoto(){
+      
+    
+      if(inputWasteContainer.value == "green"){
+        binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fgreen.png?alt=media&token=fed5248e-34dc-46b5-9dc8-9a404b4949f5";
+      }
+      else if(inputWasteContainer.value == "blue"){
+        binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fblue.png?alt=media&token=a3f9dc88-e69d-4c55-8a45-203a8f77139b";
+      }
+      else if(inputWasteContainer.value == "black"){
+        binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fblack.png?alt=media&token=0839165d-f42b-4b7d-a79f-642bba9533ca";
+      }
+      else if(inputWasteContainer.value == "yellow"){
+       binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fyellow.png?alt=media&token=516dce0c-67d3-4a30-8b35-42eb4b0dde83"
+      }
+      else if(inputWasteContainer == "red"){
+        binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fred.png?alt=media&token=b8e8d83f-1ea5-40d7-8c12-736a481cf3ab";
+      }
+      return binURL;
+    }
+  
   
 
 
@@ -193,9 +221,10 @@
           wasteContainer: inputWasteContainer.value,
           photoURL: URL,
           userID: currentUserID,
-          binURL: binURL,
+          binURL: assignContainerPhoto(),
           author: currentUser.displayName,
-          addingDate: utc
+          addingDate: utc,
+          confirmation: 0
       }).then(function() {
           console.log("status saved!");
       }).catch(function (error){
@@ -203,7 +232,26 @@
       });
   })      
 
- 
+  function assignContainerPhoto(){
+    
+    
+    if(inputWasteContainer.value == "green"){
+      binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fgreen.png?alt=media&token=fed5248e-34dc-46b5-9dc8-9a404b4949f5";
+    }
+    else if(inputWasteContainer.value == "blue"){
+      binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fblue.png?alt=media&token=a3f9dc88-e69d-4c55-8a45-203a8f77139b";
+    }
+    else if(inputWasteContainer.value == "black"){
+      binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fblack.png?alt=media&token=0839165d-f42b-4b7d-a79f-642bba9533ca";
+    }
+    else if(inputWasteContainer.value == "yellow"){
+     binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fyellow.png?alt=media&token=516dce0c-67d3-4a30-8b35-42eb4b0dde83"
+    }
+    else if(inputWasteContainer.value == "red"){
+      binURL = "https://firebasestorage.googleapis.com/v0/b/trasher-92594.appspot.com/o/gs%3A%2Ftrasher-92594.appspot.com%2Fbins%2Fred.png?alt=media&token=b8e8d83f-1ea5-40d7-8c12-736a481cf3ab";
+    }
+    return binURL;
+  }
 
 
   
@@ -217,8 +265,6 @@
       })
 
 
-    
-
 
         var timestamp = new Date().getUTCMilliseconds();
             var imagesRef = storageRef.child(productsPhoto +'/' + timestamp + '.jpg');
@@ -230,6 +276,8 @@
               
 
             }
+
+            
 
         
         
