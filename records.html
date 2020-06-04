@@ -32,7 +32,7 @@
 	<div class="topnav" id="myTopnav">
 		<a href="main.html" class="active">Home</a>
 		<a href="barcode-scanner.html">Scanner</a>
-		<a href="profileInfo.html">Settings</a>
+		<a href="settings.html">Settings</a>
 		<a href="records.html">Records</a>
         <a href="about.html">About</a>
         <a href="loggedOut.html" id='logout'>Logout</a>
@@ -64,6 +64,7 @@
     <script src="firebaseConfig.js"></script>
     <script src="app.js"></script>
 
+
    <div id="details"></div>
     <p>
     If this record is correct click appropriately
@@ -71,13 +72,13 @@
   
     <br>
     <p id="provider">
+
       Provide new barcode or use scanner
       </p>
     <input  type="textfield" id="searchForMe" value="" /><br>
 
     <button id="searchButton">Search</button>
     <button id="loadAllButton" >Load All</button>
-
 
 
     <div id='wrap' class="wrapper" style="visibility: hidden;">
@@ -120,6 +121,7 @@
             <th>Name</th>
             <th>Container</th>
           </tr>
+
         </thead>
         <tbody id="recordsBody">
 
@@ -158,7 +160,9 @@
     }
     
 
+
     hideConfirmationButtons();
+
 
     function showConfirmationButtons(){
       document.getElementById("confirmButton").style.visibility="visible";
@@ -187,6 +191,7 @@
               console.log(myData.confirmation)
           if (confirmedNumber <5 && confirmedNumber > -5){
             showConfirmationButtons();
+
 
           }
 
@@ -260,7 +265,7 @@
     
     loadAllButton.addEventListener("click", function() {
       window.location.href="allRecords.html";
-      });
+
 
     window.addEventListener('load', function () {
       var result=localStorage.getItem('result')
@@ -278,6 +283,7 @@
           confirmation: firebase.firestore.FieldValue.increment(1),
           })
           window.location.href="rated.html";
+
           console.log(myData.confirmation)
           if (myData.confirmation > 3 ){
             hideConfirmationButtons();
@@ -298,7 +304,9 @@
           docRef.update({
           confirmation: firebase.firestore.FieldValue.increment(-1),
           })
+
           window.location.href="rated.html";
+
               console.log(myData.confirmation)
           if (myData.confirmation < -3){
             hideConfirmationButtons();
@@ -317,7 +325,6 @@
     });
     })
 
-   
     
 </script>
   
