@@ -37,7 +37,8 @@
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
 <link rel="stylesheet" href="./style/main.css">
-saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+<link rel="stylesheet" type="text/css" href="./style/profile.css">
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -151,7 +152,7 @@ saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
               <p id="lajki"></p>
             </div>
           </div>
-          <div class="row">
+          <div class="row rowbuttons">
             <div class="col-sm-6"><button id="confirmButton" class="btn btn-outline-success">Confirm</button></div>
             <div class="col-sm-6"><button id="denyButton" class="btn btn-outline-danger">Deny</button> </div>
           </div>
@@ -172,6 +173,8 @@ saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
       const detailContainer = document.querySelector('#wrap');
       const detailContainerPhoto = document.querySelector('#containerPhoto');
       const searchBarCode = document.querySelector("#searchForMe");
+      const confirmButton = document.getElementById("confirmButton");
+      const denyButton = document.getElementById("denyButton");
       let barCode = "";
 
 

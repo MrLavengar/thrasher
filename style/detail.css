@@ -18,6 +18,14 @@
     -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 479px) {
+    .wrapper {
+      height:80vh; 
+      width: 80vh;
+        
+    }
+}
   
   .product-img {
     float: left;
