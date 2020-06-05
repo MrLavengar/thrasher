@@ -180,8 +180,8 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6"><button id="confirmButton" class="btn btn-outline-success">Confirm</button></div>
-            <div class="col-sm-6"><button id="denyButton" class="btn btn-outline-danger">Deny</button> </div>
+            <div class="col-sm-6"><button id="editButton" class="btn btn-outline-secondary">Edit</button></div>
+            <div class="col-sm-6"><button id="deleteButton" class="btn btn-outline-danger">Delete</button> </div>
           </div>
         </div>
       </div>
@@ -362,56 +362,7 @@
         return binURL;
       }
       
-      confirmButton.addEventListener("click", function () {
-        const docRef = firestore.doc("products/" + searchBarCode.value);
-        docRef.get().then(function (doc) {
-          if (doc && doc.exists) {
-            const myData = doc.data();
-            docRef.update({
-              confirmation: firebase.firestore.FieldValue.increment(1),
-            })
-            window.location.href = "rated.html";
-
-            console.log(myData.confirmation)
-            if (myData.confirmation > 3) {
-              hideConfirmationButtons();
-            } else {
-              console.log("printuje tutaj" + myData.confirmation)
-            }
-          }
-        })
-      });
-
-      denyButton.addEventListener("click", function () {
-        var checker;
-        const docRef = firestore.doc("products/" + searchBarCode.value);
-        docRef.get().then(function (doc) {
-          if (doc && doc.exists) {
-            const myData = doc.data();
-            checker = myData.confirmation,
-              docRef.update({
-                confirmation: firebase.firestore.FieldValue.increment(-1),
-              })
-
-            window.location.href = "rated.html";
-
-            console.log(myData.confirmation)
-            if (myData.confirmation < -3) {
-              hideConfirmationButtons();
-            }
-            if (checker == -4) {
-              console.log(checker + " to jest wartosc checkera")
-              docRef.delete().then(function () {
-                alert("This record is being deleted due to multiple denies")
-                console.log("Document successfully deleted!");
-                window.location.replace("records.html")
-              }).catch(function (error) {
-                console.error("Error removing document: ", error);
-              });
-            }
-          }
-        });
-      })
+      
 
 
       
