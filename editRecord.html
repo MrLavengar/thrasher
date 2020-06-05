@@ -57,7 +57,7 @@
     
 
 
-<h1 id="header" style="text-align: center;">Adding Record</h1>
+<h1 id="header" style="text-align: center;">Editing Record</h1>
 
 <body>
     <script src="firebaseConfig.js"></script>
@@ -108,6 +108,8 @@
     var URL;
     const inputName = document.querySelector("#nameTextHere");
     const inputBarCode = document.querySelector("#barCodeHere");
+    inputBarCode.value = localStorage.getItem("#barocde");
+    document.getElementById('barCodeHere').value = localStorage.getItem("#barocde");
     const inputWasteContainer = document.querySelector("#wasteContainerHere");
     const addButton = document.querySelector("#addButton");
     let binURL= "";
