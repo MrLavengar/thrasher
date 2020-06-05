@@ -62,7 +62,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
-  <h1 id="header">On this page you can look up records</h1>
+  <h1 id="headero">On this page you can look up records</h1>
 
   <body>
     <script src="firebaseConfig.js"></script>
@@ -70,7 +70,7 @@
 
 
     <div id="details"></div>
-    <p>
+    <p id="informer">
       If this record is correct click appropriately
     </p>
 
@@ -169,6 +169,8 @@
       const detailContainer = document.querySelector('#wrap');
       const detailContainerPhoto = document.querySelector('#containerPhoto');
       const recordsBody = document.querySelector("#recordsBody");
+      const informer = document.querySelector("#informer");
+      const header = document.querySelector("#headero");
 
 
 
@@ -242,6 +244,8 @@
         detailWastePhoto.src = myData.photoURL;
         detailContainerPhoto.src = assignContainerPhoto(doc);
         detailContainer.style.visibility = 'visible';
+        informer.style.display="none";
+        header.style.display="none";
 
         detailLikes.innerHTML = myData.confirmation;
         showConfirmationButtons();
