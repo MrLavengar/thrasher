@@ -254,6 +254,62 @@
         var showContainer = document.createElement("img");
         showContainer.src = assignContainerPhoto(doc);
 
+        confirmButton.addEventListener("click", function () {
+          console.log('dziala');
+          const docRef = firestore.doc("products/" + searchBarCode.value);
+          docRef.get().then(function (doc) {
+            if (doc && doc.exists) {
+              const myData = doc.data();
+              docRef.update({
+                confirmation: firebase.firestore.FieldValue.increment(1),
+              })
+
+              console.log(myData.confirmation)
+              if (myData.confirmation > 3) {
+                hideConfirmationButtons();
+              } else {
+                console.log("printuje tutaj" + myData.confirmation)
+                window.location.href = "rated.html";
+
+              }
+            }
+          })
+        });
+
+        denyButton.addEventListener("click", function () {
+          var checker;
+          const docRef = firestore.doc("products/" + searchBarCode.value);
+          docRef.get().then(function (doc) {
+            if (doc && doc.exists) {
+              const myData = doc.data();
+              checker = myData.confirmation,
+                docRef.update({
+                  confirmation: firebase.firestore.FieldValue.increment(-1),
+                  
+                })
+                window.location.href = "rated.html";
+
+              console.log(myData.confirmation)
+              if (myData.confirmation < -3) {
+                hideConfirmationButtons();
+              }
+              if (checker == -4) {
+                console.log(checker + " to jest wartosc checkera")
+                docRef.delete().then(function () {
+                  alert("This record is being deleted due to multiple denies")
+                  console.log("Document successfully deleted!");
+                  window.location.replace("records.html")
+                }).catch(function (error) {
+                  console.error("Error removing document: ", error);
+                });
+              }
+             // window.location.href = "rated.html";
+
+            }
+          });
+        })
+
+
       }
 
 
@@ -299,57 +355,7 @@
 
 
 
-        confirmButton.addEventListener("click", function () {
-          const docRef = firestore.doc("products/" + searchBarCode.value);
-          docRef.get().then(function (doc) {
-            if (doc && doc.exists) {
-              const myData = doc.data();
-              docRef.update({
-                confirmation: firebase.firestore.FieldValue.increment(1),
-              })
-              window.location.href = "rated.html";
-
-              console.log(myData.confirmation)
-              if (myData.confirmation > 3) {
-                hideConfirmationButtons();
-              } else {
-                console.log("printuje tutaj" + myData.confirmation)
-              }
-            }
-          })
-        });
-
-        denyButton.addEventListener("click", function () {
-          var checker;
-          const docRef = firestore.doc("products/" + searchBarCode.value);
-          docRef.get().then(function (doc) {
-            if (doc && doc.exists) {
-              const myData = doc.data();
-              checker = myData.confirmation,
-                docRef.update({
-                  confirmation: firebase.firestore.FieldValue.increment(-1),
-                })
-
-              window.location.href = "rated.html";
-
-              console.log(myData.confirmation)
-              if (myData.confirmation < -3) {
-                hideConfirmationButtons();
-              }
-              if (checker == -4) {
-                console.log(checker + " to jest wartosc checkera")
-                docRef.delete().then(function () {
-                  alert("This record is being deleted due to multiple denies")
-                  console.log("Document successfully deleted!");
-                  window.location.replace("records.html")
-                }).catch(function (error) {
-                  console.error("Error removing document: ", error);
-                });
-              }
-            }
-          });
-        })
-
+       
 
     </script>
 
