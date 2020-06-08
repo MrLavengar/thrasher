@@ -347,7 +347,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
             docRef.update({
               confirmation: firebase.firestore.FieldValue.increment(1),
             })
-            window.location.href = "rated.html";
+            setTimeout(function () {
+       window.location.href = "rated.html"; //will redirect to your blog page (an ex: blog.html)
+    }, 2000);
 
             console.log(myData.confirmation)
             if (myData.confirmation > 3) {
@@ -370,7 +372,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                 confirmation: firebase.firestore.FieldValue.increment(-1),
               })
 
-            window.location.href = "rated.html";
+              setTimeout(function () {
+       window.location.href = "rated.html"; //will redirect to your blog page (an ex: blog.html)
+    }, 4000);
 
             console.log(myData.confirmation)
             if (myData.confirmation < -3) {
