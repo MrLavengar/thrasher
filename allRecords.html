@@ -65,7 +65,14 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="./style/detail.css">
 <link rel="stylesheet" href="./style/detail.css">
-
+<style>
+  body{
+     background: linear-gradient(to bottom, #ffffff 0%, #66ff66 100%);
+ }
+ html{
+     background-color: 66ff66;
+ }
+</style>
 </head>
 
 
@@ -121,7 +128,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
       <div class="product-img">
         <img id="wastePhoto" height="420" width="327">
       </div>
-      <div class="product-info">
+      <div class="product-info" style=' background: linear-gradient(to bottom, #ffffff 0%, #66ff66 100%);'>
         <div class="product-text">
           <div class="row">
             <div class="col-sm-2">Name:</div>
@@ -286,7 +293,6 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 
 
         recordsBody.appendChild(tr);
-
       }
 
       //}
