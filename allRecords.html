@@ -182,7 +182,20 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
       let barCode = "";
 
 
+      function hideConfirmationButtons() {
+        document.getElementById("confirmButton").style.visibility = "hidden";
+        document.getElementById("denyButton").style.visibility = "hidden";
+      }
 
+
+
+      hideConfirmationButtons();
+
+
+      function showConfirmationButtons() {
+        document.getElementById("confirmButton").style.visibility = "visible";
+        document.getElementById("denyButton").style.visibility = "visible";
+      }
 
 
       var firestore = firebase.firestore();
@@ -309,6 +322,11 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 
         detailLikes.innerHTML = myData.confirmation;
 
+        var confirmedNumber = myData.confirmation;
+            console.log(myData.confirmation)
+            if (confirmedNumber < 5 && confirmedNumber > -5) {
+              showConfirmationButtons();
+            }
 
         var showContainer = document.createElement("img");
         showContainer.src = assignContainerPhoto(doc);
@@ -352,7 +370,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
     }, 2000);
 
             console.log(myData.confirmation)
-            if (myData.confirmation > 3) {
+            if (myData.confirmation > 4) {
               hideConfirmationButtons();
             } else {
               console.log("printuje tutaj" + myData.confirmation)
@@ -374,7 +392,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 
               setTimeout(function () {
        window.location.href = "rated.html"; //will redirect to your blog page (an ex: blog.html)
-    }, 4000);
+    }, 2000);
 
             console.log(myData.confirmation)
             if (myData.confirmation < -3) {

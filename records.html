@@ -231,7 +231,7 @@
 
       function showDetail(doc) {
         const myData = doc.data();
-        localStorage.setItem("result",searchBarCode.value);
+        localStorage.setItem("result", searchBarCode.value);
         // var showName = document.createElement("p");
         detailName.innerHTML = myData.name;
 
@@ -249,7 +249,7 @@
         header.style.display="none";
 
         detailLikes.innerHTML = myData.confirmation;
-        showConfirmationButtons();
+        //showConfirmationButtons();
 
 
         var showContainer = document.createElement("img");
@@ -266,11 +266,13 @@
               })
 
               console.log(myData.confirmation)
-              if (myData.confirmation > 3) {
+              if (myData.confirmation > 4) {
                 hideConfirmationButtons();
               } else {
                 console.log("printuje tutaj" + myData.confirmation)
-                window.location.href = "rated.html";
+                setTimeout(function () {
+                  window.location.href = "rated.html"; //will redirect to your blog page (an ex: blog.html)
+                }, 2000);
 
               }
             }
@@ -288,7 +290,9 @@
                   confirmation: firebase.firestore.FieldValue.increment(-1),
                   
                 })
-                window.location.href = "rated.html";
+                setTimeout(function () {
+                  window.location.href = "rated.html"; //will redirect to your blog page (an ex: blog.html)
+                }, 2000);
 
               console.log(myData.confirmation)
               if (myData.confirmation < -3) {
@@ -345,13 +349,13 @@
 
       loadAllButton.addEventListener("click", function () {
         window.location.href = "allRecords.html";
-
+      })
 
         window.addEventListener('load', function () {
           var result = localStorage.getItem('result')
           document.getElementById('searchForMe').value = result
           console.log(result)
-        })
+        
       });
 
 
