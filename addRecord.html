@@ -230,6 +230,9 @@
       }).catch(function (error){
           console.log("got an error: ", error);
       });
+      setTimeout(function () {
+                  window.location.href = "rated.html"; //will redirect to your blog page (an ex: blog.html)
+                }, 3000);
   })      
 
   function assignContainerPhoto(){
