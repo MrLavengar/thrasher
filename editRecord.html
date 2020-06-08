@@ -90,7 +90,7 @@
       </div>
 
       
-    <button id="addButton">Add</button>
+    <button id="addButton">Edit</button>
   
     <script>
     var firestore = firebase.firestore();
@@ -209,7 +209,7 @@
 
 
     addButton.addEventListener("click", function() {
-      const docRef = firestore.doc("products/"+ localStorage.getItem('result'));
+      const docRef = firestore.doc("products/"+ localStorage.getItem('barcode'));
       console.log("I am going to save details to FIRESTORE");
       let currentUser = firebase.auth().currentUser;
       let currentUserID;
@@ -229,6 +229,7 @@
           confirmation: 0
       }).then(function() {
           console.log("status saved!");
+          window.location.href="myRecords.html";
       }).catch(function (error){
           console.log("got an error: ", error);
       });

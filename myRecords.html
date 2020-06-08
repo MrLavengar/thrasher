@@ -338,7 +338,7 @@
         showContainer.src = assignContainerPhoto(doc);
 
         editButton.addEventListener("click", function(){
-          localStorage.setItem("barcode", doc.data().barCode)
+          localStorage.setItem("barcode", doc.data().barCode);
           window.location.href = "editRecord.html";
         })
 

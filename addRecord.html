@@ -227,12 +227,14 @@
           confirmation: 0
       }).then(function() {
           console.log("status saved!");
+        window.location.href="allRecords.html";
       }).catch(function (error){
           console.log("got an error: ", error);
       });
-      setTimeout(function () {
+   /*   setTimeout(function () {
                   window.location.href = "rated.html"; //will redirect to your blog page (an ex: blog.html)
                 }, 3000);
+                */
   })      
 
   function assignContainerPhoto(){
